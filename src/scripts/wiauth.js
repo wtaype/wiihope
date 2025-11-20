@@ -1,8 +1,7 @@
 import $ from 'jquery';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { auth, db } from './init.js';
-import './wimodal.js'; 
-
+import './wimodal.js';   
 // Auth imports
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, 
   updateProfile, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
