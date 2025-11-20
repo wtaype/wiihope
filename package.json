@@ -2,13 +2,18 @@
   "name": "wiihope",
   "type": "module",
   "version": "0.0.1",
+  "description": "Wiihope - Fe buena en Dios. Palabra de Dios y audio Biblia.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "dev:live": "astro dev --host",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.15.9"
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "astro": "^5.15.9",
+    "firebase": "^12.6.0",
+    "jquery": "^3.7.1"
   }
 }
