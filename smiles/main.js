@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import './audios.js';
+import './citas.js';
 import { rutas } from './rutas.js';
 import { wiSmart, getls, Mensaje } from './widev.js'; 
 
@@ -18,5 +20,5 @@ wiSmart({
     'https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css',
   ],
-  js: [() => import('./footer.js'), () => import('./devmain.js'),  () => import('./audios.js'),  () => import('./citas.js')]
+  js: [() => import('./footer.js'), () => import('./devmain.js')]
 }); // ⚡ Carga inteligente de recursos
