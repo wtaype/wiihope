@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { wiHoras } from './wihoras.js';
-import { wiMeses, cleanup } from './wimeses.js'; 
+// import { wiMeses, cleanup } from './wimeses.js'; 
 import { wiSpin, removels } from '../widev.js';
 
 export const actualizado = async () => {
