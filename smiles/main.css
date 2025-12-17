@@ -1,0 +1,363 @@
+/* ==================== FRASES BÍBLICAS ==================== */
+
+/* Contenedor principal - OVERRIDE */
+.phrs {
+  position: relative;
+  padding-block: 2vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5vh 1vw;
+}
+
+/* Card individual - MEJORAS */
+.phr {
+  position: relative;
+  min-height: 18.5vh;
+  padding: 2vh 1.5vw;
+  transition: all var(--tr_m);
+  overflow: visible;
+}
+
+.phr:hover {
+  transform: translateY(-0.5vh);
+  box-shadow: 0 0.8vh 2vh rgba(0,0,0,0.15);
+}
+
+/* Botones de acción */
+.phr_acciones {
+  position: absolute;
+  top: 1vh;
+  right: 1vh;
+  display: flex;
+  gap: 0.5vh;
+  opacity: 0;
+  transition: opacity var(--tr_f);
+  z-index: 10;
+}
+
+.phr:hover .phr_acciones {
+  opacity: 1;
+}
+
+.phr_btn {
+  width: 3vh;
+  height: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg1);
+  border: none;
+  border-radius: 0.5vh;
+  cursor: pointer;
+  transition: all var(--tr_f);
+  font-size: var(--fz_s4);
+  color: var(--tx);
+}
+
+.phr_btn:hover {
+  background: var(--bg5);
+  transform: scale(1.1);
+}
+
+.phr_btn.btn_favorito {
+  color: var(--warning);
+}
+
+.phr_btn.btn_favorito.active {
+  background: var(--warning);
+  color: var(--F);
+}
+
+.phr_btn.btn_editar:hover {
+  background: var(--info);
+  color: var(--F);
+}
+
+.phr_btn.btn_eliminar:hover {
+  background: var(--error);
+  color: var(--F);
+}
+
+/* Card "Agregar más" */
+.phr.phr_add {
+  background: linear-gradient(135deg, var(--bg9), var(--bg10));
+  border: 2px dashed var(--bg2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1vh;
+  color: var(--F);
+  cursor: pointer;
+  min-height: 18.5vh;
+}
+
+.phr.phr_add:hover {
+  background: linear-gradient(135deg, var(--bg10), var(--bg2));
+  border-color: var(--F);
+  transform: translateY(-0.8vh) scale(1.02);
+  box-shadow: 0 1vh 2.5vh rgba(0,0,0,0.2);
+}
+
+.phr_add i {
+  font-size: var(--fz_x1);
+}
+
+.phr_add span {
+  font-size: var(--fz_m3);
+  font-weight: 600;
+}
+
+/* Indicador favorito */
+.phr.favorito::before {
+  content: '⭐';
+  position: absolute;
+  top: 1vh;
+  left: 1vh;
+  font-size: var(--fz_m3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ==================== MODAL ==================== */
+.wiModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--tr_m);
+}
+
+.wiModal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modalBody {
+  background: var(--F);
+  border-radius: 1.5vh;
+  box-shadow: 0 2vh 4vh rgba(0,0,0,0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform var(--tr_m);
+}
+
+.wiModal.active .modalBody {
+  transform: scale(1);
+}
+
+.modalX {
+  position: absolute;
+  top: 1.5vh;
+  right: 1.5vh;
+  width: 4vh;
+  height: 4vh;
+  background: var(--error);
+  color: var(--F);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fz_m3);
+  transition: all var(--tr_f);
+  z-index: 10;
+}
+
+.modalX:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.modal_hd {
+  padding: 2.5vh 2vw;
+  border-bottom: 2px solid var(--bg11);
+  background: linear-gradient(135deg, var(--bg9), var(--bg10));
+  border-radius: 1.5vh 1.5vh 0 0;
+}
+
+.modal_hd h3 {
+  color: var(--F);
+  font-size: var(--fz_l1);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 1vh;
+}
+
+.modal_body {
+  padding: 3vh 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.form_grp {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.form_grp label {
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 0.8vh;
+}
+
+.form_grp input,
+.form_grp textarea {
+  padding: 1.2vh 1vw;
+  border: 2px solid var(--bg11);
+  border-radius: 0.8vh;
+  font-size: var(--fz_m2);
+  color: var(--tx);
+  background: var(--bg3);
+  transition: all var(--tr_f);
+  font-family: var(--ff_P);
+}
+
+.form_grp input:focus,
+.form_grp textarea:focus {
+  border-color: var(--mco);
+  background: var(--F);
+  box-shadow: 0 0 0 3px var(--bg4);
+}
+
+.form_grp textarea {
+  resize: vertical;
+  min-height: 10vh;
+  line-height: 1.6;
+}
+
+.form_check {
+  display: flex;
+  align-items: center;
+  gap: 1vh;
+  padding: 1vh;
+  background: var(--bg3);
+  border-radius: 0.8vh;
+  cursor: pointer;
+  transition: all var(--tr_f);
+}
+
+.form_check:hover {
+  background: var(--bg5);
+}
+
+.form_check input[type="checkbox"] {
+  width: 2.5vh;
+  height: 2.5vh;
+  cursor: pointer;
+  accent-color: var(--warning);
+}
+
+.modal_ftr {
+  padding: 2vh 2vw 2.5vh;
+  border-top: 2px solid var(--bg11);
+  display: flex;
+  gap: 1vh;
+  justify-content: flex-end;
+}
+
+.btn_pri,
+.btn_sec {
+  padding: 1.2vh 2vw;
+  border: none;
+  border-radius: 0.8vh;
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8vh;
+  transition: all var(--tr_f);
+  font-family: var(--ff_P);
+}
+
+.btn_pri {
+  background: linear-gradient(135deg, var(--bg9), var(--bg10));
+  color: var(--F);
+  box-shadow: 0 0.5vh 1.5vh rgba(0,0,0,0.2);
+}
+
+.btn_pri:hover {
+  transform: translateY(-0.3vh);
+  box-shadow: 0 0.8vh 2vh rgba(0,0,0,0.3);
+}
+
+.btn_sec {
+  background: var(--bg11);
+  color: var(--tx);
+}
+
+.btn_sec:hover {
+  background: var(--bg5);
+}
+
+.text-muted {
+  font-size: var(--fz_s3);
+  color: var(--txe);
+  opacity: 0.7;
+}
+
+/* ==================== ESTADOS ==================== */
+.frases_empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5vh;
+}
+
+.frases_empty i {
+  font-size: var(--fz_x2);
+  color: var(--mco);
+  margin-bottom: 2vh;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 770px) {
+  .phrs {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .phr_acciones {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 570px) {
+  .phrs {
+    grid-template-columns: 1fr;
+  }
+  
+  .modalBody {
+    width: 95%;
+  }
+  
+  .modal_ftr {
+    flex-direction: column;
+  }
+  
+  .btn_pri,
+  .btn_sec {
+    width: 100%;
+    justify-content: center;
+  }
+}

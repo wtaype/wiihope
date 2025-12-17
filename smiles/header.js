@@ -11,14 +11,17 @@ export function personal(wi) {
     </div>
     <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
   `);
-  rutas.navigate('/smile');
+  // rutas.navigate('/smile');
 } // Funcion para Auth personal 
 
 export const header = (() => {
   let wi = getls('wiSmile'); wi ? cargandoPersonal(wi) : publico(); //Cache Primero
 
   function publico() {
-    $('.wiauth').html(`<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>`);
+    $('.wiauth').html(`
+      <button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button>
+      <button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>
+  `);
   }
 
   async function cargandoPersonal(wi) {

@@ -230,14 +230,16 @@ export const formatoHora = (() => {
 })();
 
 // CARGANDO V10.2
-export const wiSpin = (() => {
-  const cache = new WeakMap();
-  return (btn, act = true, txt = '', t = 3000) => {
-    const $btn = $(btn);
-    if (act) cache.set(btn, {html: $btn.html(), disabled: $btn.prop('disabled'), t: setTimeout(() => wiSpin(btn, false), t)}), $btn.prop('disabled', true).html(`${txt} <i class="fas fa-spinner fa-spin"></i>`);
-    else (s => (clearTimeout(s?.t), s && $btn.prop('disabled', s.disabled).html(s.html), cache.delete(btn)))(cache.get(btn));
-  };
-})();
+export const wiSpin = (btn, act = true, txt = '') => {
+  const $btn = $(btn);
+  if (act) {
+    const texto = txt || $btn.text().trim();
+    $btn.data('txt', texto).prop('disabled', true).html(`${texto} <i class="fas fa-spinner fa-spin"></i>`);
+  } else {
+    $btn.prop('disabled', false).text($btn.data('txt') || txt || 'Continuar');
+  }
+};
+
 
 // SALUDO DE BIENVENIDA V10.1
 export const Saludar = () => {

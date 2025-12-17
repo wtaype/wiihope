@@ -1,6 +1,5 @@
 import './smile.css';
 import $ from 'jquery';
-import { wiMeses } from './wimeses.js';
 import { wiHoras } from './wihoras.js';
 import { actualizado } from './wiupdate.js';
 import { wiIp, savels, getls, Saludar, wiSpin } from '../widev.js';
