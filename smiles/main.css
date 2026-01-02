@@ -154,4 +154,13 @@
 .frases_empty i { font-size: var(--fz_x2); color: var(--mco); margin-bottom: 2vh; }
 
 @media (max-width: 770px) { .phrs { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); } .phr_acciones { opacity: 1; } }
-@media (max-width: 570px) { .phrs { grid-template-columns: 1fr; } .modalBody { width: 95%; } .form_row { grid-template-columns: 1fr; } .modal_ftr { flex-direction: column; } .btn_pri { width: 100%; justify-content: center; } }
+@media (max-width: 570px) {
+   .phrs { grid-template-columns: 1fr; }
+   .modalBody { width: 95%; } 
+   .form_row { grid-template-columns: 1fr; } 
+   .modal_ftr { flex-direction: column; } 
+   .btn_pri { width: 100%; justify-content: center; } 
+  .pg1, .pg2, .pg3, .pg5{
+    display: none;
+   }
+  }
