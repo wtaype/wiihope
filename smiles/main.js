@@ -1,16 +1,11 @@
 import $ from 'jquery';
-import './audios.js';
-import { rutas } from './rutas.js';
+import { rutas} from './rutas.js';
 import { wiSmart, getls, Mensaje } from './widev.js'; 
 
-// 🎯 REGISTRAR TODAS LAS RUTAS (públicas + privada)
-const pages = ['hora'];
-pages.forEach(pg => rutas.register(`/${pg}`, () => import(`./pages/${pg}.js`))); 
+rutas.register('/', () => import('./inicio.js')); // 🎯 Ruta Publica 
+// rutas.register('/smile', () => getls('wiSmile') ? import('./smile/smile.js') : import('./inicio.js')); // 🔐 Ruta privada 
 
-// 🔐 Ruta privada con guard inteligente
-rutas.register('/smile', () => getls('wiSmile') ? import('./smile/smile.js') : import('./smile/descubre.js'));
-
-import('./header.js'); // ⚡ Cargar header DESPUÉS del registro
+import('./header.js'); // ⚡ Header Personalizado 
 rutas.init(); // 🚀 Inicializar UNA SOLA VEZ
 
 wiSmart({
@@ -19,5 +14,5 @@ wiSmart({
     'https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css',
   ],
-  js: [() => import('./footer.js'), () => import('./devmain.js'), () => import('./citas.js')]
+  js: [() => import('./mainwi.js')]
 }); // ⚡ Carga inteligente de recursos

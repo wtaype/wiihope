@@ -140,7 +140,6 @@ const eventos = () => {
       await Promise.all([updateProfile(user, { displayName: usuario }), sendEmailVerification(user)]);
       const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid, terminos: true, tema:localStorage.wiTema};
       await setDoc(doc(db, cfg.db, usuario), { ...widatos, creado: serverTimestamp() });
-      savels('wiSmile', widatos, 450); Mensaje('¡Registro completado! ✅'); cerrarModal('registroModal'); // 💾 Registro y guardamos datos 
       (await import('./header.js')).personal(widatos); // Header personalizado
     } catch (error) {
       const errores = { 'auth/email-already-in-use': 'Email ya registrado', 'auth/weak-password': 'Contraseña débil' };
@@ -162,7 +161,6 @@ const eventos = () => {
       const usuario = correo.includes('@') ? (await getDoc(doc(db, cfg.db, auth.currentUser.displayName))).data() : (await getDoc(doc(db, cfg.db, campo))).data();
       if (usuario.tema) { localStorage.wiTema = usuario.tema; aplicarTema(usuario.tema); }
       savels('wiSmile', usuario, 450); cerrarModal('loginModal'); // 💾 Guardamos Auht
-      (await import('./header.js')).personal(usuario); // Header personalizado
     } catch (error) {
       const errores = { 'auth/invalid-credential': 'Contraseña incorrecta', 'auth/invalid-email': 'Email no válido', 'auth/missing-email': 'Usuario no registrado' };
       Mensaje(errores[error.code] || error.message, 'error'); console.error(error);

@@ -19,163 +19,6 @@ export const wiSmart = (() => {
   return (obj) => cache ? procesar(obj) : $(document).one('touchstart scroll click mousemove', () => procesar(obj));
 })();
 
-
-// BANDERAS V11
-export const wiFlag = (cod) => {
-  if (!cod || cod.length !== 2) return null;
-  const cache = getls('wiFlags') || {};
-  const url = cache[cod] || `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${cod.toLowerCase()}.svg`;
-  if (!cache[cod]) savels('wiFlags', { ...cache, [cod]: url }, 168);
-  return url;
-};
-
-// CIUDADES DEL MUNDO V10.1
-export const wiCiudades = {
-  principales: [
-    { ciudad: 'Lima', pais: 'Perú', codigo: 'PE', zona: 'America/Lima', capital: true },
-    { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
-    { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
-    { ciudad: 'Londres', pais: 'Reino Unido', codigo: 'GB', zona: 'Europe/London', capital: true }
-  ],  
-  asia: [
-    { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
-    { ciudad: 'Seúl', pais: 'Corea del Sur', codigo: 'KR', zona: 'Asia/Seoul', capital: true },
-    { ciudad: 'Tel Aviv', pais: 'Israel', codigo: 'IL', zona: 'Asia/Jerusalem', capital: false },
-    { ciudad: 'Pekín', pais: 'China', codigo: 'CN', zona: 'Asia/Shanghai', capital: true },
-    { ciudad: 'Bangkok', pais: 'Tailandia', codigo: 'TH', zona: 'Asia/Bangkok', capital: true },
-    { ciudad: 'Singapur', pais: 'Singapur', codigo: 'SG', zona: 'Asia/Singapore', capital: true },
-    { ciudad: 'Dubái', pais: 'Emiratos Árabes', codigo: 'AE', zona: 'Asia/Dubai', capital: false },
-    { ciudad: 'Mumbai', pais: 'India', codigo: 'IN', zona: 'Asia/Kolkata', capital: false },
-    { ciudad: 'Manila', pais: 'Filipinas', codigo: 'PH', zona: 'Asia/Manila', capital: true },
-    { ciudad: 'Yakarta', pais: 'Indonesia', codigo: 'ID', zona: 'Asia/Jakarta', capital: true },
-    { ciudad: 'Hong Kong', pais: 'China', codigo: 'HK', zona: 'Asia/Hong_Kong', capital: false },
-    { ciudad: 'Shanghái', pais: 'China', codigo: 'CN', zona: 'Asia/Shanghai', capital: false },
-    { ciudad: 'Kuala Lumpur', pais: 'Malasia', codigo: 'MY', zona: 'Asia/Kuala_Lumpur', capital: true },
-    { ciudad: 'Hanói', pais: 'Vietnam', codigo: 'VN', zona: 'Asia/Ho_Chi_Minh', capital: true },
-    { ciudad: 'Estambul', pais: 'Turquía', codigo: 'TR', zona: 'Europe/Istanbul', capital: false }
-  ],  
-  europa: [
-    { ciudad: 'Londres', pais: 'Reino Unido', codigo: 'GB', zona: 'Europe/London', capital: true },
-    { ciudad: 'París', pais: 'Francia', codigo: 'FR', zona: 'Europe/Paris', capital: true },
-    { ciudad: 'Berlín', pais: 'Alemania', codigo: 'DE', zona: 'Europe/Berlin', capital: true },
-    { ciudad: 'Madrid', pais: 'España', codigo: 'ES', zona: 'Europe/Madrid', capital: true },
-    { ciudad: 'Roma', pais: 'Italia', codigo: 'IT', zona: 'Europe/Rome', capital: true },
-    { ciudad: 'Ámsterdam', pais: 'Países Bajos', codigo: 'NL', zona: 'Europe/Amsterdam', capital: true },
-    { ciudad: 'Estocolmo', pais: 'Suecia', codigo: 'SE', zona: 'Europe/Stockholm', capital: true },
-    { ciudad: 'Moscú', pais: 'Rusia', codigo: 'RU', zona: 'Europe/Moscow', capital: true },
-    { ciudad: 'Atenas', pais: 'Grecia', codigo: 'GR', zona: 'Europe/Athens', capital: true },
-    { ciudad: 'Lisboa', pais: 'Portugal', codigo: 'PT', zona: 'Europe/Lisbon', capital: true },
-    { ciudad: 'Viena', pais: 'Austria', codigo: 'AT', zona: 'Europe/Vienna', capital: true },
-    { ciudad: 'Praga', pais: 'República Checa', codigo: 'CZ', zona: 'Europe/Prague', capital: true },
-    { ciudad: 'Copenhague', pais: 'Dinamarca', codigo: 'DK', zona: 'Europe/Copenhagen', capital: true },
-    { ciudad: 'Dublín', pais: 'Irlanda', codigo: 'IE', zona: 'Europe/Dublin', capital: true },
-    { ciudad: 'Bruselas', pais: 'Bélgica', codigo: 'BE', zona: 'Europe/Brussels', capital: true }
-  ],  
-  america: [
-    { ciudad: 'Los Ángeles', pais: 'Estados Unidos', codigo: 'US', zona: 'America/Los_Angeles', capital: false },
-    { ciudad: 'Ciudad de México', pais: 'México', codigo: 'MX', zona: 'America/Mexico_City', capital: true },
-    { ciudad: 'Buenos Aires', pais: 'Argentina', codigo: 'AR', zona: 'America/Argentina/Buenos_Aires', capital: true },
-    { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
-    { ciudad: 'Santiago', pais: 'Chile', codigo: 'CL', zona: 'America/Santiago', capital: true },
-    { ciudad: 'Miami', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
-    { ciudad: 'São Paulo', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
-    { ciudad: 'Lima', pais: 'Perú', codigo: 'PE', zona: 'America/Lima', capital: true },
-    { ciudad: 'Bogotá', pais: 'Colombia', codigo: 'CO', zona: 'America/Bogota', capital: true },
-    { ciudad: 'Toronto', pais: 'Canadá', codigo: 'CA', zona: 'America/Toronto', capital: false },
-    { ciudad: 'Río de Janeiro', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
-    { ciudad: 'Montevideo', pais: 'Uruguay', codigo: 'UY', zona: 'America/Montevideo', capital: true },
-    { ciudad: 'Caracas', pais: 'Venezuela', codigo: 'VE', zona: 'America/Caracas', capital: true },
-    { ciudad: 'Quito', pais: 'Ecuador', codigo: 'EC', zona: 'America/Guayaquil', capital: true },
-    { ciudad: 'La Paz', pais: 'Bolivia', codigo: 'BO', zona: 'America/La_Paz', capital: true }
-  ],  
-  oceania: [
-    { ciudad: 'Sídney', pais: 'Australia', codigo: 'AU', zona: 'Australia/Sydney', capital: false },
-    { ciudad: 'Melbourne', pais: 'Australia', codigo: 'AU', zona: 'Australia/Melbourne', capital: false },
-    { ciudad: 'Auckland', pais: 'Nueva Zelanda', codigo: 'NZ', zona: 'Pacific/Auckland', capital: false },
-    { ciudad: 'Brisbane', pais: 'Australia', codigo: 'AU', zona: 'Australia/Brisbane', capital: false },
-    { ciudad: 'Perth', pais: 'Australia', codigo: 'AU', zona: 'Australia/Perth', capital: false },
-    { ciudad: 'Wellington', pais: 'Nueva Zelanda', codigo: 'NZ', zona: 'Pacific/Auckland', capital: true },
-    { ciudad: 'Canberra', pais: 'Australia', codigo: 'AU', zona: 'Australia/Sydney', capital: true },
-    { ciudad: 'Suva', pais: 'Fiyi', codigo: 'FJ', zona: 'Pacific/Fiji', capital: true },
-    { ciudad: 'Port Moresby', pais: 'Papúa Nueva Guinea', codigo: 'PG', zona: 'Pacific/Port_Moresby', capital: true },
-    { ciudad: 'Adelaida', pais: 'Australia', codigo: 'AU', zona: 'Australia/Adelaide', capital: false },
-    { ciudad: 'Gold Coast', pais: 'Australia', codigo: 'AU', zona: 'Australia/Brisbane', capital: false },
-    { ciudad: 'Christchurch', pais: 'Nueva Zelanda', codigo: 'NZ', zona: 'Pacific/Auckland', capital: false },
-    { ciudad: 'Hobart', pais: 'Australia', codigo: 'AU', zona: 'Australia/Hobart', capital: false },
-    { ciudad: 'Nouméa', pais: 'Nueva Caledonia', codigo: 'NC', zona: 'Pacific/Noumea', capital: true },
-    { ciudad: 'Papeete', pais: 'Polinesia Francesa', codigo: 'PF', zona: 'Pacific/Tahiti', capital: true }
-  ],
-  africa: [
-    { ciudad: 'El Cairo', pais: 'Egipto', codigo: 'EG', zona: 'Africa/Cairo', capital: true },
-    { ciudad: 'Lagos', pais: 'Nigeria', codigo: 'NG', zona: 'Africa/Lagos', capital: false },
-    { ciudad: 'Ciudad del Cabo', pais: 'Sudáfrica', codigo: 'ZA', zona: 'Africa/Johannesburg', capital: false },
-    { ciudad: 'Nairobi', pais: 'Kenia', codigo: 'KE', zona: 'Africa/Nairobi', capital: true },
-    { ciudad: 'Casablanca', pais: 'Marruecos', codigo: 'MA', zona: 'Africa/Casablanca', capital: false },
-    { ciudad: 'Johannesburgo', pais: 'Sudáfrica', codigo: 'ZA', zona: 'Africa/Johannesburg', capital: false },
-    { ciudad: 'Argel', pais: 'Argelia', codigo: 'DZ', zona: 'Africa/Algiers', capital: true },
-    { ciudad: 'Adís Abeba', pais: 'Etiopía', codigo: 'ET', zona: 'Africa/Addis_Ababa', capital: true },
-    { ciudad: 'Dakar', pais: 'Senegal', codigo: 'SN', zona: 'Africa/Dakar', capital: true },
-    { ciudad: 'Túnez', pais: 'Túnez', codigo: 'TN', zona: 'Africa/Tunis', capital: true },
-    { ciudad: 'Accra', pais: 'Ghana', codigo: 'GH', zona: 'Africa/Accra', capital: true },
-    { ciudad: 'Kampala', pais: 'Uganda', codigo: 'UG', zona: 'Africa/Kampala', capital: true },
-    { ciudad: 'Luanda', pais: 'Angola', codigo: 'AO', zona: 'Africa/Luanda', capital: true },
-    { ciudad: 'Kinsasa', pais: 'R.D. del Congo', codigo: 'CD', zona: 'Africa/Kinshasa', capital: true },
-    { ciudad: 'Abiyán', pais: 'Costa de Marfil', codigo: 'CI', zona: 'Africa/Abidjan', capital: false }
-  ]
-};
-
-// INFORMACIÓN DE LA CIUDAD V10.2 (CORREGIDO)
-export const infoCiudad = (zona) => {
-  try {
-    const ahora = new Date();
-    const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: zona, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-    const fmtFecha = new Intl.DateTimeFormat('es-ES', { timeZone: zona, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    const fmtGmt = new Intl.DateTimeFormat('es-ES', { timeZone: zona, timeZoneName: 'shortOffset' });
-    const gmtOffset = fmtGmt.formatToParts(ahora).find(p => p.type === 'timeZoneName')?.value || 'GMT+0';
-    
-    // ✅ CORREGIDO: Detección de hemisferio SUR más robusta
-    const zonasSur = [
-      'Lima', 'Santiago', 'Buenos_Aires', 'Montevideo', 'Sao_Paulo', 'La_Paz', 
-      'Asuncion', 'Guayaquil', 'Caracas', 'Sydney', 'Melbourne', 'Brisbane', 
-      'Perth', 'Adelaide', 'Hobart', 'Auckland', 'Johannesburg', 'Cairo'
-    ];
-    
-    const esSur = zonasSur.some(ciudad => zona.includes(ciudad));
-    
-    // Calcular estación por hemisferio
-    const mes = ahora.getMonth();
-    const estacionesNorte = ['Invierno','Invierno','Primavera','Primavera','Primavera','Verano','Verano','Verano','Otoño','Otoño','Otoño','Invierno'];
-    const estacionesSur = ['Verano','Verano','Otoño','Otoño','Otoño','Invierno','Invierno','Invierno','Primavera','Primavera','Primavera','Verano'];
-    const estacion = esSur ? estacionesSur[mes] : estacionesNorte[mes];
-    
-    // Detectar cambio horario (DST)
-    const enero = new Date(ahora.getFullYear(), 0, 1);
-    const julio = new Date(ahora.getFullYear(), 6, 1);
-    const offsetEnero = new Intl.DateTimeFormat('es-ES', { timeZone: zona, timeZoneName: 'shortOffset' }).formatToParts(enero).find(p => p.type === 'timeZoneName')?.value;
-    const offsetJulio = new Intl.DateTimeFormat('es-ES', { timeZone: zona, timeZoneName: 'shortOffset' }).formatToParts(julio).find(p => p.type === 'timeZoneName')?.value;
-    const cambioHorario = offsetEnero !== offsetJulio;
-    
-    return {
-      hora: fmtHora.format(ahora),
-      fecha: fmtFecha.format(ahora),
-      gmt: gmtOffset,
-      estacion,
-      timestamp: Math.floor(ahora.getTime() / 1e3),
-      cambioHorario
-    };
-  } catch (error) {
-    console.error(`❌ Error en infoCiudad(${zona}):`, error.message);
-    return null;
-  }
-};
-
-// BUSCADOR DE CIUDADES V10.1
-export const buscarCiudad = (termino, continente = null) => {
-  const bus = termino.toLowerCase().trim();
-  const fue = continente ? wiCiudades[continente] : Object.values(wiCiudades).flat();
-  return fue.filter(c => c.ciudad.toLowerCase().includes(bus) || c.pais.toLowerCase().includes(bus));
-};
-
 // === PATH VELOCIDAD V10.2 
 export const wiPath = {
   clean(pth) {const bas = import.meta?.env?.BASE_URL || '/'; const sav = sessionStorage.ghPath; if (sav) {sessionStorage.removeItem('ghPath'); return sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';} return bas !== '/' && pth?.startsWith(bas) ? pth.slice(bas.length - 1) || '/' : pth || '/';},
@@ -193,42 +36,6 @@ export const wiAnimate = {
   pulse(s) {$(s).addClass('pulse'); setTimeout(() => $(s).removeClass('pulse'), 500)}
 };
 
-// HORAS DEL DÍA V10.1
-export const esNoche = (hora) => {
-  const h = typeof hora === 'string' ? parseInt(hora.split(':')[0]) : hora;
-  return h >= 6 && h < 19;
-};
-
-// === ⏰ FORMATO DE HORA V11 ===
-export const formatoHora = (() => {
-  let formato = getls('wiClockFormat') || '24';
-  
-  const convertir = (hora24) => {
-    if (formato === '24') return hora24;
-    const [h, m, s] = hora24.split(':').map(Number);
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const h12 = h % 12 || 12;
-    return `${h12.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')} ${ampm}`;
-  };
-  
-  const cambiar = (nuevoFormato) => {
-    if (['12', '24'].includes(nuevoFormato) && formato !== nuevoFormato) {
-      formato = nuevoFormato;
-      savels('wiClockFormat', formato, 720);
-      return true;
-    }
-    return false;
-  };
-  
-  return {
-    get actual() { return formato; },
-    convertir,
-    cambiar,
-    es12h: () => formato === '12',
-    es24h: () => formato === '24'
-  };
-})();
-
 // CARGANDO V10.2
 export const wiSpin = (btn, act = true, txt = '') => {
   const $btn = $(btn);
@@ -239,7 +46,6 @@ export const wiSpin = (btn, act = true, txt = '') => {
     $btn.prop('disabled', false).text($btn.data('txt') || txt || 'Continuar');
   }
 };
-
 
 // SALUDO DE BIENVENIDA V10.1
 export const Saludar = () => {
@@ -271,6 +77,7 @@ export function savels(clave, valor, horas = 24) {
   try {
     if (!clave || typeof clave !== 'string') return false;
     localStorage.setItem(clave, JSON.stringify({ value: valor, expiry: Date.now() + horas * 3600000 }));
+    clave === 'wiSmile' && window.dispatchEvent(new CustomEvent('wiFresh', { detail: valor }));
     return true;
   } catch(e) { console.error('esv:', e); return false; }
 }
@@ -351,37 +158,6 @@ export const cerrarTodos = () => {
 })();
 // === [END] MODALES V10.4 ===
 
-// GUARDAR FECHAS BASE DE DATOS V10.1
-export const savebd = (fecha, tms = null) => {
-  const [año, mes, dia] = fecha.split('-').map(Number);
-  const ahora = new Date();
-  const fechaObj = new Date(año, mes - 1, dia, ahora.getHours(), ahora.getMinutes(), ahora.getSeconds());
-  return tms ? tms.fromDate(fechaObj) : fechaObj.toISOString();
-};
-// OBTENER FECHAS BASE DE DATOS V10.1
-export const getbd = (tm) => {
-  if (!tm) return '';
-  const dt = tm.toDate?.()
-    || (tm._seconds && new Date(tm._seconds * 1000)) || (tm.seconds && new Date(tm.seconds * 1000)) || new Date(tm);
-  return isNaN(dt) ? '' : `${dt.getDate().toString().padStart(2,'0')}/${(dt.getMonth()+1).toString().padStart(2,'0')}/${dt.getFullYear()}`;
-};
-
-// === COPIAR TEXTOS V10.2 ===
-export const wicopy = (txt, elm = null, msg = '¡Copiado!') => {
-  const getCnt = () => txt instanceof $ ? txt.text() || txt.val() || '' : txt?.nodeType ? txt.textContent || txt.value || '' : typeof txt === 'string' && txt.trim().match(/^[.#\[]/) && $(txt).length ? $(txt).text() || $(txt).val() || '' : String(txt ?? '');
-  const cnt = getCnt();
-  const fin = () => elm ? wiTip(elm, msg, 'success', 1500) : console.log(`${msg}: ${cnt}`);
-  if (navigator.clipboard?.writeText) {
-    navigator.clipboard.writeText(cnt).then(fin).catch(() => {
-      const $t = $('<textarea>').val(cnt).css({position:'absolute',left:'-9999px'}).appendTo('body');
-      $t[0].select(); document.execCommand('copy'); $t.remove(); fin();
-    });
-  } else {
-    const $t = $('<textarea>').val(cnt).css({position:'absolute',left:'-9999px'}).appendTo('body');
-    $t[0].select(); document.execCommand('copy'); $t.remove(); fin();
-  }
-};
-
 // FECHA CON FIREBASE + CACHE V12
 export const wiDate = (tm) => ({
   save: val => {
@@ -399,6 +175,22 @@ export const wiDate = (tm) => ({
     return ajustada.toISOString().split('T')[0];
   }
 });
+
+// === COPIAR TEXTOS V10.2 ===
+export const wicopy = (txt, elm = null, msg = '¡Copiado!') => {
+  const getCnt = () => txt instanceof $ ? txt.text() || txt.val() || '' : txt?.nodeType ? txt.textContent || txt.value || '' : typeof txt === 'string' && txt.trim().match(/^[.#\[]/) && $(txt).length ? $(txt).text() || $(txt).val() || '' : String(txt ?? '');
+  const cnt = getCnt();
+  const fin = () => elm ? wiTip(elm, msg, 'success', 1500) : console.log(`${msg}: ${cnt}`);
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(cnt).then(fin).catch(() => {
+      const $t = $('<textarea>').val(cnt).css({position:'absolute',left:'-9999px'}).appendTo('body');
+      $t[0].select(); document.execCommand('copy'); $t.remove(); fin();
+    });
+  } else {
+    const $t = $('<textarea>').val(cnt).css({position:'absolute',left:'-9999px'}).appendTo('body');
+    $t[0].select(); document.execCommand('copy'); $t.remove(); fin();
+  }
+};
 
 // === [START] FUNCIONES GENIALES V10.1 ===
 export const Mayu = (ltr) => ltr.toUpperCase();

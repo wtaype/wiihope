@@ -5,7 +5,7 @@ let app = 'WiiPrime';
 class WiRouter {
   constructor() {
     this.ruta = {};
-    this.defaultRoute = '/hora';
+    this.defaultRoute = '/'; // Ruta por defecto
     this.currentRoute = null;
     this.contentContainer = '#wiMainContent';
     this.isNavigating = false;
@@ -24,7 +24,7 @@ class WiRouter {
     if (normalizedPath === '/') normalizedPath = this.defaultRoute;
 
     let moduleLoader = this.ruta[normalizedPath];
-    if (!moduleLoader) moduleLoader = () => import('./pages/404.js');
+    if (!moduleLoader) moduleLoader = () => import('./main/404.js');
 
     try {
       this.updateActiveNav(normalizedPath);
@@ -34,7 +34,7 @@ class WiRouter {
       const content = await module.render();
       await wiAnimate.fade(this.contentContainer, content);
 
-      const pageName = normalizedPath.replace('/', '').replace(/^(\w)/, c => c.toUpperCase()) || 'Hora';
+      const pageName = normalizedPath.replace('/', '').replace(/^(\w)/, c => c.toUpperCase()) || 'Inicio';
       document.title = `${pageName} - ${app}`;
 
       if (module.init) module.init();
@@ -51,7 +51,7 @@ class WiRouter {
   }
 
   updateActiveNav(path) {
-    const page = path.replace('/', '') || 'hora';
+    const page = path.replace('/', '') || 'inicio';
     $('.winav_item').removeClass('active');
     $(`.winav_item[data-page="${page}"]`).addClass('active');
   }
@@ -74,7 +74,7 @@ class WiRouter {
     $(document).on('click', '.winav_item', (e) => {
       e.preventDefault();
       const page = $(e.currentTarget).data('page');
-      this.navigate(page === 'hora' ? '/' : `/${page}`);
+      this.navigate(page === 'inicio' ? '/' : `/${page}`);
     });
 
     window.addEventListener('popstate', (e) => {

@@ -1,8 +1,42 @@
 import $ from 'jquery';
 
-// MI AUDIO FUNCION
-$(function(){
-const books={
+// 🚀 MÓDULO PRINCIPAL
+export const wiAudios = () => {
+  $('#audioPlayer').html(`
+<div class='mwb go3'>
+<div class='player-container'>
+<div class='visualizer'></div>
+<div class='track-info'><h2 id='currentTrack'>Selecciona un capítulo</h2></div>
+<div class='progress-container'>
+<div class='progress-bar'><div class='progress'></div></div>
+<div class='time-info dpw'><span id='currentTime'>0:00</span><span id='duration'>0:00</span></div>
+</div>
+<div class='controls dpc ipy'>
+<button aria-label='control prev' class='control-btn' id='prevBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='10,6 10,18 2,12'></polygon><polygon points='18,6 18,18 10,12'></polygon></svg></button>
+<button aria-label='control play' class='control-btn play-btn' id='playBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='8,6 20,12 8,18'></polygon></svg></button>
+<button aria-label='control next' class='control-btn' id='nextBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='14,6 14,18 22,12'></polygon><polygon points='6,6 6,18 14,12'></polygon></svg></button>
+<button aria-label='control repetir' class='control-btn' id='repeatBtn'><svg viewBox='0 0 24 24'><rect></rect><path d='M8 10h8l-2-2m2 6h-8l2 2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></path></svg></button>
+<div class='volume-container dpc'>
+<button aria-label='control mute' class='control-btn' id='muteBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='6,8 10,8 14,4 14,20 10,16 6,16'></polygon><path d='M15 9a2 3 0 0 1 0 6' stroke-width='2'></path><path d='M18 7.7a2 3 0 0 1 0 9' stroke-width='2'></path></svg></button>
+<div class='volume-bar'>
+<div class='volume-level'></div>
+</div>
+</div>
+</div>
+</div>
+<div class='playlist-container'>
+<div class='playlist-header'>
+<span>Biblia Audio </span>
+<input id='searchInput' placeholder='Buscar...' type='text'/>
+</div>
+<div class='playlist' id='playlist'></div>
+</div>
+</div>
+  `);
+
+
+
+ const books={
     "San Mateo":28,"San Marcos":16,"San Lucas":24,"San Juan":21,"Hechos":28,"Romanos":16,
     "1 Corintios":16,"2 Corintios":13,"Galatas":6,"Efesios":6,"Filipenses":4,"Colosenses":4,
     "1 Tesalonicenses":5,"2 Tesalonicenses":3,"1 Timoteo":6,"2 Timoteo":4,"Tito":3,"Filemon":1,
@@ -95,5 +129,5 @@ const books={
   }
 // HACIENDO PAUSE Y WAVE PARA ANIMACIONES 
 $('.visualizer').click(()=>isPlaying?pauseTrack():playTrack()).html(`<div class="wave">${'<div class="wave-bar"></div>'.repeat(20)}</div>`)
-  
-});
+
+};

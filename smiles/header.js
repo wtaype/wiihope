@@ -1,6 +1,5 @@
 import $ from 'jquery';
-import { rutas } from './rutas.js';
-import { wiSmart, getls, savels, removels, Mensaje } from './widev.js';
+import { wiSmart, getls, removels, Mensaje } from './widev.js';
 wiSmart({ js: [() => import('./wiauth.js')] });
 
 export function personal(wi) {
@@ -11,7 +10,6 @@ export function personal(wi) {
     </div>
     <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
   `);
-  // rutas.navigate('/smile');
 } // Funcion para Auth personal 
 
 export const header = (() => {
@@ -32,11 +30,13 @@ export const header = (() => {
       if (!user) return removels('wiSmile'), publico();
     });
   }
+    window.addEventListener('wiFresh', (e) => cargandoPersonal(e.detail));
 //CERRAR SESSIÓN
   $(document).on('click', '.bt_salir', async () => {
     const { auth, signOut } = await import('./wiauth.js');
-    await signOut(auth); removels('wiSmile wiciudades wifechas smileIP wiHoras wiNotas'); publico(); rutas.navigate('/'); location.reload();
-  }); 
+    await signOut(auth); location.reload();
+    removels('wiSmile wiFlags');
+  });
 
 })();
 
