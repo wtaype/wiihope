@@ -892,7 +892,7 @@ nav {
     loaded = true;
     const s = document.createElement('script');
     s.type = 'module';
-    s.src = '/smiles/main.js?v=17';
+    s.src = new URL('smiles/main.js', document.baseURI).href; // sirve desde /public
     s.onerror = e => console.error('WiiHope load failed', e);
     document.head.appendChild(s);
     events.forEach(ev => window.removeEventListener(ev, handler, opts));
