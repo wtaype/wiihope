@@ -1,13 +1,16 @@
 import $ from 'jquery';
-import { rutas} from './rutas.js';
-import { wiSmart, getls, Mensaje } from './widev.js'; 
+import { wiSmart, wiAnimate } from './widev.js';
 
-rutas.register('/', () => import('./inicio.js')); // 🎯 Ruta Publica 
-// rutas.register('/smile', () => getls('wiSmile') ? import('./smile/smile.js') : import('./inicio.js')); // 🔐 Ruta privada 
+// 🎯 CARGA DIRECTA - Sin rutas.js
+Promise.all([
+  import('./header.js'),
+  import('./inicio.js').then(async mod => {
+    await wiAnimate.fade('#wiMainContent', await mod.render());
+    if (mod.init) mod.init();
+  })
+]);
 
-import('./header.js'); // ⚡ Header Personalizado 
-rutas.init(); // 🚀 Inicializar UNA SOLA VEZ
-
+// ⚡ Recursos externos
 wiSmart({
   css: [
     'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap',
@@ -15,4 +18,4 @@ wiSmart({
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css',
   ],
   js: [() => import('./mainwi.js')]
-}); // ⚡ Carga inteligente de recursos
+});
