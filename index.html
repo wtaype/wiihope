@@ -880,26 +880,27 @@ nav {
 <script>
 (()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
 </script>
-<script type="module">
+<script>
 (() => {
   let loaded = false;
-  const events = ['touchstart','scroll','click','mousemove'];
+  const events = ['touchstart', 'scroll', 'click', 'mousemove'];
   const opts = { passive: true };
-  const handler = () => load('event');
-
-  async function load(reason = 'timeout') {
+  const handler = () => load('interaction');
+  
+  function load(reason = 'timeout') {
     if (loaded) return;
     loaded = true;
-    console.info('[wiLoader] start', { reason });
-    try {
-      await import('./smiles/main.js'); // Vite la reescribe a /assets/*.js en build
-      console.info('[wiLoader] done');
-    } catch (e) {
-      console.error('[wiLoader] error', e);
-    }
+    console.log('[wiLoader] 🚀 loading via', reason);
+    const s = document.createElement('script');
+    s.type = 'module';
+    // Vite reemplazará esta ruta en build si existe en public/
+    s.src = '/smiles/main.js?t=' + Date.now();
+    s.onload = () => console.log('[wiLoader] ✅ main loaded');
+    s.onerror = e => console.error('[wiLoader] ❌ error', e);
+    document.body.appendChild(s);
     events.forEach(ev => window.removeEventListener(ev, handler, opts));
   }
-
+  
   events.forEach(ev => window.addEventListener(ev, handler, opts));
   setTimeout(() => load('fallback'), 3000);
 })();
