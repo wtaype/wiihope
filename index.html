@@ -883,24 +883,23 @@ nav {
 <script>
 (() => {
   let loaded = false;
-  const events = ['touchstart', 'scroll', 'click', 'mousemove'];
+  const events = ['touchstart','scroll','click','mousemove'];
   const opts = { passive: true };
-  const handler = () => load('interaction');
-  
+  const handler = () => load('event');
+
   function load(reason = 'timeout') {
     if (loaded) return;
     loaded = true;
-    console.log('[wiLoader] 🚀 loading via', reason);
+    console.info('[wiLoader] 🚀 start', { reason });
     const s = document.createElement('script');
     s.type = 'module';
-    // Vite reemplazará esta ruta en build si existe en public/
-    s.src = '/smiles/main.js?t=' + Date.now();
-    s.onload = () => console.log('[wiLoader] ✅ main loaded');
+    s.src = '/smiles/main.js'; // ruta absoluta desde public/
+    s.onload = () => console.info('[wiLoader] ✅ loaded');
     s.onerror = e => console.error('[wiLoader] ❌ error', e);
     document.body.appendChild(s);
     events.forEach(ev => window.removeEventListener(ev, handler, opts));
   }
-  
+
   events.forEach(ev => window.addEventListener(ev, handler, opts));
   setTimeout(() => load('fallback'), 3000);
 })();
