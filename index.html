@@ -886,8 +886,7 @@ nav {
   let loaded = false;
   const events = ['touchstart','scroll','click','mousemove'];
   const opts = { passive: true };
-  const base = document.querySelector('link[rel="canonical"]')?.href || document.baseURI;
-  const url = new URL('./smiles/main.js', base).href;
+  const url = new URL('smiles/main.js?v=17', location.href).href; // misma raíz/origen
   const handler = () => load('event');
   function load(reason = 'timeout') {
     if (loaded) return;
@@ -895,7 +894,7 @@ nav {
     console.info('[wiLoader] loading', { reason, url });
     const s = document.createElement('script');
     s.type = 'module';
-    s.src = `${url}?v=17`;
+    s.src = url;
     s.onload = () => console.info('[wiLoader] main loaded');
     s.onerror = e => console.error('[wiLoader] load failed', e);
     document.head.appendChild(s);
