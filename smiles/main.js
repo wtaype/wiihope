@@ -1,19 +1,21 @@
-import { wiSmart } from './widev.js';
+import $ from 'jquery';
+import { wiVista } from './widev.js';
 
-// 🚀 TODO CARGA POR EVENTOS (lazy)
-wiSmart({
-  css: [
-    'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap',
-    'https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css',
-  ],
-  js: [
-    () => import('./header.js'),
-    () => import('./inicio.js').then(async mod => {
-      const html = await mod.render(); // ✅ Await aquí
-      document.querySelector('#wiMainContent').innerHTML = html;
-      mod.init?.();
-    }),
-    () => import('./mainwi.js')
-  ]
-});
+export const render = async () => {
+  const html = `
+    <div class="phrs mwb dpw frases" id="frases"></div>
+    <div class="mp3 audio" id="audioPlayer"></div>
+    <div class="about awb mwb dpvc" id="acerca"></div>
+  `;
+  $('#wiMainContent').html(html).children().css('opacity', 0).animate({ opacity: 1 }, 400);
+};
+
+export const init = async () => {
+  await render(); // Auto-renderiza dentro de main
+  
+  wiVista('#frases', async () => (await import('./main/citas.js')).wiCitas());
+  wiVista('#audioPlayer', async () => (await import('./main/audios.js')).wiAudios());
+  wiVista('#acerca', async () => (await import('./main/acerca.js')).wiAcerca());
+};
+
+export const cleanup = () => $('#wiMainContent').empty();
