@@ -886,9 +886,9 @@ nav {
   let loaded = false;
   const events = ['touchstart','scroll','click','mousemove'];
   const opts = { passive: true };
-  const url = new URL('smiles/main.js?v=17', location.href).href; // misma raíz/origen
+  const url = './smiles/main.js?v=17'; // relativo al sitio (firebase y gh-pages)
   const handler = () => load('event');
-  function load(reason = 'timeout') {
+  function load(reason='timeout'){
     if (loaded) return;
     loaded = true;
     console.info('[wiLoader] loading', { reason, url });
