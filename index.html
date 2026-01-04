@@ -884,21 +884,25 @@ nav {
 <script>
 (() => {
   let loaded = false;
-  const events = ['touchstart', 'scroll', 'click', 'mousemove'];
+  const events = ['touchstart','scroll','click','mousemove'];
   const opts = { passive: true };
-  const handler = () => load();
-  function load() {
+  const base = document.querySelector('link[rel="canonical"]')?.href || document.baseURI;
+  const url = new URL('./smiles/main.js', base).href;
+  const handler = () => load('event');
+  function load(reason = 'timeout') {
     if (loaded) return;
     loaded = true;
+    console.info('[wiLoader] loading', { reason, url });
     const s = document.createElement('script');
     s.type = 'module';
-    s.src = new URL('smiles/main.js', document.baseURI).href; // sirve desde /public
-    s.onerror = e => console.error('WiiHope load failed', e);
+    s.src = `${url}?v=17`;
+    s.onload = () => console.info('[wiLoader] main loaded');
+    s.onerror = e => console.error('[wiLoader] load failed', e);
     document.head.appendChild(s);
     events.forEach(ev => window.removeEventListener(ev, handler, opts));
   }
   events.forEach(ev => window.addEventListener(ev, handler, opts));
-  setTimeout(load, 3000);
+  setTimeout(() => load('fallback'), 3000);
 })();
 </script>
 </html>
