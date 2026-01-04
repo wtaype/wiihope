@@ -877,21 +877,18 @@ nav {
   <div class="tema" data-ths="Futuro|#21273B"></div>
 </div>
 </body>
-<script>
-(()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
-</script>
 <script type="module">
   let wiLoaded = false;
+  const events = ['touchstart', 'scroll', 'click', 'mousemove'];
   const loadWi = () => {
     if (wiLoaded) return;
     wiLoaded = true;
-    import('./smiles/main.js').catch(console.error);
-    events.forEach(ev => window.removeEventListener(ev, handler, { passive: true }));
+    import('./smiles/main.js').catch(err => console.error('WiiHope load failed', err));
+    events.forEach(ev => window.removeEventListener(ev, handler, opt));
   };
   const handler = () => loadWi();
-  const events = ['touchstart', 'scroll', 'click', 'mousemove'];
-  events.forEach(ev => window.addEventListener(ev, handler, { passive: true, once: false }));
-  // Fallback: carga si no hubo interacción en 3s
+  const opt = { passive: true };
+  events.forEach(ev => window.addEventListener(ev, handler, opt));
   setTimeout(loadWi, 3000);
 </script>
 </html>
