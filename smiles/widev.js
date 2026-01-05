@@ -1,49 +1,9 @@
 import $ from 'jquery'; 
 
-// === 🚀 CARGA RÁPIDA v16 ===
-export const wihd=({css=[]})=>{css.forEach(u=>!$(`link[href="${u}"]`).length&&$('<link>',{rel:'stylesheet',href:u}).appendTo('head'))};
-
-
 // === 👁️ OBSERVER LAZY v11 ===
 export const wiVista = (sel, fn) => {
   const e = $(sel)[0];
   e && new IntersectionObserver(([x], o) => x.isIntersecting && (fn(), o.disconnect()), { rootMargin: '50px' }).observe(e);
-};
-
-// ===  ⚡ CARGA INTELIGENTE v14 ===
-export const wiSmart = (() => {
-  const cargados = new Set(), cache = getls('wiSmart');
-  const cargar = (tipo, item) => {
-    const clave = `${tipo}:${item}`;
-    if (cargados.has(clave)) return; 
-    cargados.add(clave);
-    if (tipo === 'css') {
-      const url = item;
-      !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head');
-    } else{typeof item === 'function' && item().catch?.(e => console.error('wiSmart js error:', e));}
-  };
-  const procesar = (obj) => {
-    $.each(obj, (tipo, items) => $.each($.isArray(items) ? items : [items], (i, it) => cargar(tipo, it)));
-    savels('wiSmart', 1);
-  };
-  return (obj) => cache ? procesar(obj) : $(document).one('touchstart scroll click mousemove', () => procesar(obj));
-})();
-
-// === PATH VELOCIDAD V10.2 
-export const wiPath = {
-  clean(pth) {const bas = import.meta?.env?.BASE_URL || '/'; const sav = sessionStorage.ghPath; if (sav) {sessionStorage.removeItem('ghPath'); return sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';} return bas !== '/' && pth?.startsWith(bas) ? pth.slice(bas.length - 1) || '/' : pth || '/';},
-  update(pth, ttl = '', def = '/') {history.pushState({ path: pth }, ttl, pth === def ? '/' : pth); ttl && (document.title = ttl);},
-  params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams(prm) {const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url);},
-  get current() {return this.clean(location.pathname);}
-};
-
-// === ANIMACIÓN CARGA V10.1 
-export const wiAnimate = {
-  async fade(s, c, d = 150) {const $e = $(s); await $e.animate({ opacity: 0 }, d).promise(); $e.html(c); await $e.animate({ opacity: 1 }, d).promise()},
-  async slide(s, sh = null) {const $e = $(s); if (sh === null) sh = !$e.is(':visible'); return sh ? $e.slideDown().promise() : $e.slideUp().promise()},
-  shake(s) {$(s).addClass('shake'); setTimeout(() => $(s).removeClass('shake'), 500)},
-  pulse(s) {$(s).addClass('pulse'); setTimeout(() => $(s).removeClass('pulse'), 500)}
 };
 
 // CARGANDO V10.2

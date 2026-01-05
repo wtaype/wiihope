@@ -8,7 +8,7 @@ export { auth, onAuthStateChanged, signOut };
 export function wiAuth() {
 const cfg = { db: 'smiles', rol: 'smile' };
 
-const crearModal = (id, titulo, campos) => `<div id="${id}" class="wiModal authMod"><div class="modalBody"><button class="modalX">&times;</button><div class="modalMain"><div class="logo"><img src="./smile.png"></div><h2>${titulo}</h2><form id="${id.replace('Modal','Form')}">${campos}</form></div></div></div>`;
+const crearModal = (id, titulo, campos) => `<div id="${id}" class="wiModal authMod"><div class="modalBody"><button class="modalX">&times;</button><div class="modalMain"><div class="logo"><img src="./smile.avif"></div><h2>${titulo}</h2><form id="${id.replace('Modal','Form')}">${campos}</form></div></div></div>`;
 
 const crearCampo = (icono, tipo, idCmp, place, tgPass = false) => `<div class="grupo"><i class="fas fa-${icono}"></i><input type="${tipo}" id="${idCmp}" placeholder="${place}" required>${tgPass ? '<i class="fas fa-eye tgPass"></i>' : ''}</div>`;
 

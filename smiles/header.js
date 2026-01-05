@@ -1,6 +1,6 @@
+import './wiauth.js';
 import $ from 'jquery';
-import { wiSmart, getls, removels, Mensaje } from './widev.js';
-wiSmart({ js: [() => import('./wiauth.js')] });
+import { getls, removels, Mensaje } from './widev.js';
 
 export function personal(wi) {
   Mensaje?.('Bienvenido '+wi.nombre);
