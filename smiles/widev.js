@@ -1,7 +1,7 @@
 import $ from 'jquery'; 
 
-// === 🚀 CARGA RÁPIDA v11 ===
-export const wihd=({css=[],js=[]})=>{const h=document.head;css.forEach(u=>!$(`link[href="${u}"]`).length&&$(h).append(`<link rel="stylesheet" href="${u}">`));js.forEach(s=>import(s))};
+// === 🚀 CARGA RÁPIDA v16 ===
+export const wihd=({css=[]})=>{css.forEach(u=>!$(`link[href="${u}"]`).length&&$('<link>',{rel:'stylesheet',href:u}).appendTo('head'))};
 
 
 // === 👁️ OBSERVER LAZY v11 ===
