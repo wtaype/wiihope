@@ -1,18 +1,17 @@
 import $ from 'jquery';
 import { wiVista } from './widev.js';
 
-// ✅ INIT solo hidrata (el HTML ya existe)
 export const init = async () => {
-  // Fade-in suave del contenido existente
   $('#wiMainContent').children().css('opacity', 0).animate({ opacity: 1 }, 400);
   
-  // Lazy load con Observer
   wiVista('#frases', async () => {
+    $('#frases').empty(); // Limpia skeletons
     const { wiCitas } = await import('./main/citas.js');
     wiCitas();
   });
   
   wiVista('#audioPlayer', async () => {
+    $('#audioPlayer').empty(); // Limpia skeletons
     const { wiAudios } = await import('./main/audios.js');
     wiAudios();
   });
