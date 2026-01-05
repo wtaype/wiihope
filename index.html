@@ -47,28 +47,116 @@
   --Paz: #29C72E;
   --Mora: #7000FF;
   --Futuro: #21273B;
+
   --bg: #ccefff;
   --wb: #e5f7ff;
   --tx: #000;
   --txa: #FFF;
   --txe: #000;
+  --hv: #00a8e6;
+  --hva: #1873cd;
   --mco: #1978d7;
   --bg1: #ffffff26;
   --bg2: #1978d7;
   --bg3: #e5f7ff;
   --bg4: rgba(25, 120, 215, 0.1);
   --bg5: rgba(25, 120, 215, 0.2);
+  --bg6: rgba(204, 239, 255, 0.5);
+  --bg7: #FFF; 
   --bg8: #FFF;
   --bg9: #12a3b5;
   --bg10: #18c5c5;
   --bg11: #d4f0ff;
   --bg12: #0084b8;
 }
-:root[data-theme="Dulce"] {--bg:#ffccd1;--wb:#ffebed;--mco:#ff3849;--bg2:#ff3849;--bg3:#ffebed;--bg4:rgba(255,56,73,0.1);--bg5:rgba(255,56,73,0.2);--bg9:#ff808a;--bg10:#ff99a1;--bg11:#ffd4d7;--bg12:#ff5c69}
-:root[data-theme="Paz"] {--bg:#ccffce;--wb:#ebffeb;--mco:#25b62a;--bg2:#25b62a;--bg3:#ebffeb;--bg4:rgba(37,182,42,0.1);--bg5:rgba(37,182,42,0.2);--bg9:#0ccf6a;--bg10:#1cf284;--bg11:#d4ffd6;--bg12:#1fa832}
-:root[data-theme="Mora"] {--bg:#e4ccff;--wb:#f4ebff;--mco:#6a00f5;--bg2:#6a00f5;--bg3:#f4ebff;--bg4:rgba(106,0,245,0.1);--bg5:rgba(106,0,245,0.2);--bg9:#8c42ff;--bg10:#a666ff;--bg11:#ead4ff;--bg12:#5f00db}
-:root[data-theme="Futuro"] {--bg:#1d273f;--wb:#2a385b;--tx:#fff;--txa:#00f3ff;--txe:#3e496f;--mco:#3e496f;--bg1:#ffffff26;--bg2:#00f3ff;--bg3:#2a385b;--bg4:rgba(0,243,255,0.1);--bg5:rgba(0,243,255,0.2);--bg8:#4d5a89;--bg9:#3e496f;--bg10:#4d5a89;--bg11:#e9ecef;--bg12:#868e96}
-
+:root[data-theme="Dulce"] {
+  --bg: #ffccd1;
+  --wb: #ffebed;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #ff7a85;
+  --hva: #ff3849;
+  --mco: #ff3849;
+  --bg1: #ffffff61;
+  --bg2: #ff3849;
+  --bg3: #ffebed;
+  --bg4: rgba(255, 56, 73, 0.1);
+  --bg5: rgba(255, 56, 73, 0.2);
+  --bg6: rgba(255, 204, 209, 0.5);
+  --bg7: #FFF; 
+  --bg8: #FFF;
+  --bg9: #ff808a;
+  --bg10: #ff99a1;
+  --bg11: #ffd4d7;
+  --bg12: #ff5c69;
+}
+:root[data-theme="Paz"] {
+  --bg: #ccffce;
+  --wb: #ebffeb;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #3cd741;
+  --hva: #25b62a;
+  --mco: #25b62a;
+  --bg1: #ffffff42;
+  --bg2: #25b62a;
+  --bg3: #ebffeb;
+  --bg4: rgba(37, 182, 42, 0.1);
+  --bg5: rgba(37, 182, 42, 0.2);
+  --bg6: rgba(204, 255, 206, 0.5);
+  --bg7: #FFF; 
+  --bg8: #FFF;
+  --bg9: #0ccf6a;
+  --bg10: #1cf284;
+  --bg11: #d4ffd6;
+  --bg12: #1fa832;
+}
+:root[data-theme="Mora"] {
+  --bg: #e4ccff;
+  --wb: #f4ebff;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #9442ff;
+  --hva: #5f00db;
+  --mco: #6a00f5;
+  --bg1: #ffffff61;
+  --bg2: #6a00f5;
+  --bg3: #f4ebff;
+  --bg4: rgba(106, 0, 245, 0.1);
+  --bg5: rgba(106, 0, 245, 0.2);
+  --bg6: rgba(228, 204, 255, 0.5);
+  --bg7: #FFF; 
+  --bg8: #FFF;
+  --bg9: #8c42ff;
+  --bg10: #a666ff;
+  --bg11: #ead4ff;
+  --bg12: #5f00db;
+}
+:root[data-theme="Futuro"] {
+  --bg: #1d273f;
+  --wb: #2a385b;
+  --tx: #fff;
+  --txa: #00f3ff;
+  --txe: #3e496f;
+  --hv: #4d5a89;
+  --hva: #3e496f;
+  --mco: #3e496f;
+  --bg1: #ffffff26;
+  --bg2: #00f3ff;
+  --bg3: #2a385b;
+  --bg4: rgba(0, 243, 255, 0.1);
+  --bg5: rgba(0, 243, 255, 0.2);
+  --bg6: rgba(42, 56, 91, 0.5); 
+  --bg7: #00f3ff; 
+  --bg8: #4d5a89;
+  --bg9: #3e496f;
+  --bg10: #4d5a89;
+  --bg11: #e9ecef;
+  --bg12: #868e96;
+}
 /* ==================== RESET ==================== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 *{font-family:var(--ff_P);scrollbar-width:thin;scrollbar-color:var(--mco) var(--bg);font-size:var(--fz_m2)}

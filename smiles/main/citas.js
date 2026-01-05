@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { db } from '../../firebase/init.js';
-import { collection, query, orderBy, doc, setDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { collection, query, orderBy, doc, setDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp , where} from 'firebase/firestore';
 import { getls, savels, removels, Notificacion, abrirModal, wiDate, cerrarTodos, wiSpin } from '../widev.js';
 
 export const wiCitas = () => {
@@ -11,40 +11,45 @@ export const wiCitas = () => {
   window.addEventListener('wiFresh', (e) => { smile = e.detail; renderFrases(); });
 
   // 🎨 RENDERIZAR
-  const renderFrases = () => {
-    const $c = $('.phrs');
-    $c.find('.phr_dinamica, .phr_add, .frases_empty').remove();
-    
-    if (!frases.length) {
-      $c.append('<div class="frases_empty"><i class="fas fa-bible"></i><p>No hay frases todavía</p><p class="text-muted">¡Sé el primero en agregar una!</p></div>');
-    } else {
-      frases.forEach((f, i) => {
-        const esCreador = smile?.email === f.email;
-        const fecha = wiDate(f.actualizado || f.creado).get(f.actualizado || f.creado, 'DD/MM/YYYY');
-        
-        $c.append(`
-          <div class="phr phr_dinamica ${f.favorito ? 'favorito' : ''}" style="animation-delay: ${i * 0.15}s" data-id="${f.id}">
-            ${esCreador ? `
-              <div class="phr_acciones">
-                <button class="phr_btn btn_favorito ${f.favorito ? 'active' : ''}" data-id="${f.id}"><i class="fas fa-star"></i></button>
-                <button class="phr_btn btn_editar" data-id="${f.id}"><i class="fas fa-edit"></i></button>
-                <button class="phr_btn btn_eliminar" data-id="${f.id}"><i class="fas fa-trash-alt"></i></button>
-              </div>
-            ` : ''}
-            <div class="phr_content">
-              <p class="phr_cita">"${f.cita}"</p>
-              <cite class="phr_ref">- ${f.libro}</cite>
+const renderFrases = () => {
+  const $c = $('.phrs');
+  $c.find('.phr_dinamica, .phr_add, .frases_empty').remove();
+  
+  // Remover skeletons solo cuando hay frases
+  if (frases.length) {
+    $c.find('.skc').remove();
+  }
+  
+  if (!frases.length) {
+    $c.append('<div class="frases_empty"><i class="fas fa-bible"></i><p>No hay frases todavía</p><p class="text-muted">¡Sé el primero en agregar una!</p></div>');
+  } else {
+    frases.forEach((f, i) => {
+      const esCreador = smile?.email === f.email;
+      const fecha = wiDate(f.actualizado || f.creado).get(f.actualizado || f.creado, 'DD/MM/YYYY');
+      
+      $c.append(`
+        <div class="phr phr_dinamica ${f.favorito ? 'favorito' : ''}" style="animation-delay: ${i * 0.15}s" data-id="${f.id}">
+          ${esCreador ? `
+            <div class="phr_acciones">
+              <button class="phr_btn btn_favorito ${f.favorito ? 'active' : ''}" data-id="${f.id}"><i class="fas fa-star"></i></button>
+              <button class="phr_btn btn_editar" data-id="${f.id}"><i class="fas fa-edit"></i></button>
+              <button class="phr_btn btn_eliminar" data-id="${f.id}"><i class="fas fa-trash-alt"></i></button>
             </div>
-            <div class="phr_footer">
-              <span>${fecha} - Por ${f.nombreShow || f.usuario}</span>
-            </div>
+          ` : ''}
+          <div class="phr_content">
+            <p class="phr_cita">"${f.cita}"</p>
+            <cite class="phr_ref">- ${f.libro}</cite>
           </div>
-        `);
-      });
-    }
-    
-    smile?.email && $c.append(`<div class="phr phr_add" style="animation-delay: ${frases.length * 0.15}s"><i class="fas fa-plus"></i><span>Agregar más citas</span></div>`);
-  };
+          <div class="phr_footer">
+            <span>${fecha} - Por ${f.nombreShow || f.usuario}</span>
+          </div>
+        </div>
+      `);
+    });
+  }
+  
+  smile?.email && $c.append(`<div class="phr phr_add" style="animation-delay: ${frases.length * 0.15}s"><i class="fas fa-plus"></i><span>Agregar más citas</span></div>`);
+};
 
   // 📝 MODAL
   const modalFrase = (id = null) => {

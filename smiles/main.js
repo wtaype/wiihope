@@ -5,7 +5,6 @@ export const init = async () => {
   $('#wiMainContent').children().css('opacity', 0).animate({ opacity: 1 }, 400);
   
   wiVista('#frases', async () => {
-    $('#frases').empty(); // Limpia skeletons
     const { wiCitas } = await import('./main/citas.js'); wiCitas();
   });
   
