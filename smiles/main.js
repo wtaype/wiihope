@@ -6,19 +6,15 @@ export const init = async () => {
   
   wiVista('#frases', async () => {
     $('#frases').empty(); // Limpia skeletons
-    const { wiCitas } = await import('./main/citas.js');
-    wiCitas();
+    const { wiCitas } = await import('./main/citas.js'); wiCitas();
   });
   
   wiVista('#audioPlayer', async () => {
-    $('#audioPlayer').empty(); // Limpia skeletons
-    const { wiAudios } = await import('./main/audios.js');
-    wiAudios();
+    const { wiAudios } = await import('./main/audios.js'); wiAudios();
   });
   
   wiVista('#acerca', async () => {
-    const { wiAcerca } = await import('./main/acerca.js');
-    wiAcerca();
+    const { wiAcerca } = await import('./main/acerca.js'); wiAcerca();
   });
 };
 
