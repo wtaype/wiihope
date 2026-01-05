@@ -6,7 +6,7 @@ export function personal(wi) {
   Mensaje?.('Bienvenido '+wi.nombre);
   $('.wiauth').html(`
     <div class="sesion">
-      <img src="${wi.imagen||'./smile.png'}" alt="${wi.nombre}"><span>${wi.nombre}</span>
+      <img src="${wi.imagen||'./smile.avif'}" alt="${wi.nombre}"><span>${wi.nombre}</span>
     </div>
     <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
   `);
