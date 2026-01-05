@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/smile.png" />
+  <link rel="icon" type="image/avif" href="/smile.avif" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Wiihope es una aplicación diseñada para compartir y aprender más sobre la palabra de Dios con propósito de fortalecer la fe." />
   <link rel="canonical" href="https://wtaype.github.io/wiihope/" />
@@ -881,6 +881,6 @@ nav {
 (()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
 </script>
 <script type="module">
-(()=>{const k='wiflash',c=localStorage[k],e=['touchstart','scroll','click','mousemove'],o={passive:!0,once:!0};let l=0;const load=async()=>{if(l++)return;const{wihd}=await import('./smiles/widev.js');wihd({css:['https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap','https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css']});import('./smiles/header.js');import('./smiles/mainwi.js');(await import('./smiles/main.js')).init();localStorage[k]=1};c?load():e.forEach(v=>addEventListener(v,load,o))})();
+(()=>{const k='wiflash',c=localStorage[k],e=['touchstart','scroll','click','mousemove'],o={passive:!0,once:!0};let l=0;const load=async()=>{if(l++)return;const{wihd}=await import('./smiles/widev.js');wihd({css:['https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap','https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css']});Promise.all([import('./smiles/header.js'),import('./smiles/mainwi.js'),(await import('./smiles/main.js')).init()]);localStorage[k]=1};c?load():e.forEach(v=>addEventListener(v,load,o))})();
 </script>
 </html>
