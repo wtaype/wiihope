@@ -118,7 +118,7 @@ nav a{color:var(--F)}
 /* ==================== SKELETON LOADERS ==================== */
 .sk{background:linear-gradient(90deg,var(--bg11) 25%,var(--bg3) 50%,var(--bg11) 75%);background-size:200% 100%;animation:skl 1.5s infinite}
 @keyframes skl{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.skc{min-height:16vh;padding:2vh 1.5vw;background:var(--F);border-radius:1.5vh;box-shadow:var(--bs_s);display:flex;flex-direction:column;gap:1vh}
+.skc{min-height:32.5vh;width:89vw;padding:2vh 1.5vw;background:var(--F);border-radius:1.5vh;box-shadow:var(--bs_s);display:flex;flex-direction:column;gap:1vh}
 .skc .skl{height:1.2vh;border-radius:0.6vh}
 .skc .skl:nth-child(1){width:90%}
 .skc .skl:nth-child(2){width:95%}
@@ -135,6 +135,7 @@ nav a{color:var(--F)}
   .hd{height:auto}
   .mlp{grid-template-columns:auto;padding:2vw 1vw}
   .pg1,.pg2,.pg3,.pg5{display:none}
+  .skc{width:98vw;min-height:52.5vh}
 }
 </style>
 <style>@import url(/smiles/main/citas.css);</style>
@@ -182,18 +183,8 @@ nav a{color:var(--F)}
     <!-- Skeletons Citas -->
     <div class="phrs mwb dpw frases" id="frases">
       <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
-      <div class="skc"><div class="skl sk"></div><div class="skl sk"></div><div class="skl sk"></div></div>
     </div>
 
-    <!-- Skeleton Audio -->
     <div class="mp3 audio" id="audioPlayer"></div>
     <div class="about awb mwb dpvc" id="acerca"></div>
   </main>
@@ -210,7 +201,7 @@ nav a{color:var(--F)}
 <script>
 (()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
 </script>
-<script type="module">
+<!-- <script type="module">
 (()=>{const k='wiflash',c=localStorage[k],e=['touchstart','scroll','click','mousemove'];let l=0;const load=()=>{if(l++)return;const h=document.head,css=[
   'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap',
   'https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap',
@@ -220,5 +211,5 @@ nav a{color:var(--F)}
     import('./smiles/main.js'),
     import('./smiles/mainwi.js')
   ]).then(([_,m])=>m.init());localStorage[k]=1};c?load():e.forEach(v=>addEventListener(v,load,{passive:!0,once:!0}))})();
-</script>
+</script> -->
 </html>
