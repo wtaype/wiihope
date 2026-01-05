@@ -179,7 +179,7 @@ export const wiAudios = () => {
 
   const loadState = () => {
     const saved = getls('audioActual');
-    saved >= 0 && saved < tracks.length && load(saved);
+    (saved !== null && saved >= 0 && saved < tracks.length) && load(saved);
     
     const vol = getls('aVolumen');
     vol && (audio.volume = vol, updateVol(vol));
@@ -190,5 +190,8 @@ export const wiAudios = () => {
   loadState();
   
   // Wave click
-  $('#viz').on('click', () => state.firstPlay && !audio.src ? (load(0), play()) : state.playing ? pause() : play());
+  $(document).on('click','#viz', function(){
+    !audio.src ? (load(0), play()) : state.playing ? pause() : play();
+  });
+
 };

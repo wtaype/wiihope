@@ -211,7 +211,9 @@
   border-radius: 50%;
   font-size: var(--fz_l2);
 }
-
+.ctrls .fas{
+  font-size: var(--fz_l)!important;
+}
 /* ==================== VOLUME - CONTROL DE VOLUMEN ==================== */
 /* Contenedor del botón mute + barra de volumen */
 .vol {
@@ -379,8 +381,7 @@
 #audioPlayer:-moz-full-screen .viz {
   min-height: 50vh;
 }
-
- /* ==================== TABLET (770px) ==================== */
+/* ==================== TABLET (770px) ==================== */
 @media (max-width:770px){
 .ctrls{gap:2vw;}
 .ctrl{height:6vh;width:6vh;font-size:var(--fz_m3);}
