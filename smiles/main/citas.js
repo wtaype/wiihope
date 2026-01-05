@@ -191,11 +191,27 @@ export const wiCitas = () => {
   cache && (frases = cache, renderFrases());
   
   unsubscribe = onSnapshot(
-    query(collection(db, 'wicitas'), orderBy('creado', 'desc')),
+    query(
+      collection(db, 'wicitas'),
+      where('publico', '==', true)
+    ),
     (snap) => {
-      frases = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.favorito - a.favorito) || (a.orden || 0) - (b.orden || 0));
-      savels('wiFrases', frases);
-      renderFrases();
+      const publicas = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      
+      // Si hay usuario, agregar sus frases privadas
+      if (smile?.email) {
+        getDocs(query(collection(db, 'wicitas'), where('email', '==', smile.email), where('publico', '==', false)))
+          .then(snapPrivado => {
+            const privadas = snapPrivado.docs.map(d => ({ id: d.id, ...d.data() }));
+            frases = [...publicas, ...privadas].sort((a, b) => (b.favorito - a.favorito) || (a.orden || 0) - (b.orden || 0));
+            savels('wiFrases', frases);
+            renderFrases();
+          });
+      } else {
+        frases = publicas.sort((a, b) => (b.favorito - a.favorito) || (a.orden || 0) - (b.orden || 0));
+        savels('wiFrases', frases);
+        renderFrases();
+      }
     },
     (e) => { console.error(e); Notificacion('Cargando desde caché', 'info'); }
   );
