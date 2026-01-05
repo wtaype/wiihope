@@ -1,3 +1,4 @@
+import './acerca.css';
 import $ from 'jquery';
 
 // 🚀 MÓDULO PRINCIPAL

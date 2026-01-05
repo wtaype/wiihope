@@ -1,3 +1,4 @@
+import './audios.css';
 import $ from 'jquery';
 
 // 🚀 MÓDULO PRINCIPAL

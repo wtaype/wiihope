@@ -1,0 +1,67 @@
+/* ==================== ACERCA ==================== */
+.awb {
+  width: 100%;
+  max-width: 800px;
+  line-height: 1.9;
+  text-align: justify;
+  padding: 5vh 2vw;
+  margin: 0 auto;
+}
+
+.awbt {
+  font-size: var(--fz_l1);
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 3vh;
+  text-align: center;
+}
+
+.awbc {
+  color: var(--tx);
+}
+
+.awbc p {
+  padding: 1vh 0;
+  font-size: var(--fz_m2);
+  line-height: 1.8;
+}
+
+.awbc a {
+  color: var(--mco);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color var(--tr_f);
+}
+
+.awbc a:hover {
+  color: var(--bg12);
+}
+
+.awbc strong {
+  color: var(--mco);
+  font-weight: 700;
+}
+
+/* ==================== MEDIA QUERIES ==================== */
+@media (max-width: 770px) {
+  .awb {
+    max-width: 97vw;
+    padding: 3vh 3vw;
+  }
+}
+
+@media (max-width: 570px) {
+  .awb {
+    max-width: 97.8%;
+    padding: 2vh 2vw;
+  }
+  
+  .awbt {
+    font-size: var(--fz_l1);
+    margin-bottom: 2vh;
+  }
+  
+  .awbc p {
+    font-size: var(--fz_m1);
+  }
+}
