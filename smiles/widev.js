@@ -1,12 +1,8 @@
 import $ from 'jquery'; 
 
 // === 🚀 CARGA RÁPIDA v11 ===
-export const wihd = ({ css = [], js = [], jss = [] }) => {
-  const h = document.head;
-  css.forEach(u => !$(`link[href="${u}"]`).length && $(h).append(`<link rel="stylesheet" href="${u}">`));
-  js.forEach(s => !$(`script[src="${s}"]`).length && $(h).append(`<script type="module" src="${s}"></script>`));
-  jss.forEach(s => !$(`script[src="${s}"]`).length && $(h).append(`<script src="${s}"></script>`));
-};
+export const wihd=({css=[],js=[]})=>{const h=document.head;css.forEach(u=>!$(`link[href="${u}"]`).length&&$(h).append(`<link rel="stylesheet" href="${u}">`));js.forEach(s=>import(s))};
+
 
 // === 👁️ OBSERVER LAZY v11 ===
 export const wiVista = (sel, fn) => {
