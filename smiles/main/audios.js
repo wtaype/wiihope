@@ -1,134 +1,194 @@
 import './audios.css';
 import $ from 'jquery';
+import { savels, getls, Notificacion } from '../widev.js';
 
-// 🚀 MÓDULO PRINCIPAL
 export const wiAudios = () => {
   $('#audioPlayer').html(`
 <div class='mwb go3'>
-<div class='player-container'>
-<div class='visualizer'></div>
-<div class='track-info'><h2 id='currentTrack'>Selecciona un capítulo</h2></div>
-<div class='progress-container'>
-<div class='progress-bar'><div class='progress'></div></div>
-<div class='time-info dpw'><span id='currentTime'>0:00</span><span id='duration'>0:00</span></div>
+<div class='plyr'>
+<div class='viz' id='viz'><div class='wave'>${'<div class="wvs"></div>'.repeat(30)}</div></div>
+<div class='info'><h2 id='ct'>Haz clic en el visualizador para iniciar</h2></div>
+<div class='pgc'>
+<div class='pgb'><div class='pg'></div></div>
+<div class='time dpw'><span id='cur'>0:00</span><span id='dur'>0:00</span></div>
 </div>
-<div class='controls dpc ipy'>
-<button aria-label='control prev' class='control-btn' id='prevBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='10,6 10,18 2,12'></polygon><polygon points='18,6 18,18 10,12'></polygon></svg></button>
-<button aria-label='control play' class='control-btn play-btn' id='playBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='8,6 20,12 8,18'></polygon></svg></button>
-<button aria-label='control next' class='control-btn' id='nextBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='14,6 14,18 22,12'></polygon><polygon points='6,6 6,18 14,12'></polygon></svg></button>
-<button aria-label='control repetir' class='control-btn' id='repeatBtn'><svg viewBox='0 0 24 24'><rect></rect><path d='M8 10h8l-2-2m2 6h-8l2 2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'></path></svg></button>
-<div class='volume-container dpc'>
-<button aria-label='control mute' class='control-btn' id='muteBtn'><svg viewBox='0 0 24 24'><rect></rect><polygon points='6,8 10,8 14,4 14,20 10,16 6,16'></polygon><path d='M15 9a2 3 0 0 1 0 6' stroke-width='2'></path><path d='M18 7.7a2 3 0 0 1 0 9' stroke-width='2'></path></svg></button>
-<div class='volume-bar'>
-<div class='volume-level'></div>
-</div>
+<div class='ctrls dpc'>
+<button class='ctrl' id='prev'><i class='fas fa-backward'></i></button>
+<button class='ctrl pby' id='play'><i class='fas fa-play'></i></button>
+<button class='ctrl' id='next'><i class='fas fa-forward'></i></button>
+<button class='ctrl' id='rep'><i class='fas fa-repeat'></i></button>
+<div class='vol dpc'>
+<button class='ctrl' id='mute'><i class='fas fa-volume-high'></i></button>
+<div class='vb'><div class='vl'></div></div>
 </div>
 </div>
 </div>
-<div class='playlist-container'>
-<div class='playlist-header'>
-<span>Biblia Audio </span>
-<input id='searchInput' placeholder='Buscar...' type='text'/>
+<div class='plst'>
+<div class='plh dpw'>
+<span class='ttl'>Biblia Audio</span>
+<button class='ctrl fsc' id='full'><i class='fas fa-expand'></i></button>
+<input id='src' placeholder='Buscar...' type='text'/>
 </div>
-<div class='playlist' id='playlist'></div>
+<div class='pls' id='pls'></div>
 </div>
 </div>
   `);
 
-
-
- const books={
-    "San Mateo":28,"San Marcos":16,"San Lucas":24,"San Juan":21,"Hechos":28,"Romanos":16,
-    "1 Corintios":16,"2 Corintios":13,"Galatas":6,"Efesios":6,"Filipenses":4,"Colosenses":4,
-    "1 Tesalonicenses":5,"2 Tesalonicenses":3,"1 Timoteo":6,"2 Timoteo":4,"Tito":3,"Filemon":1,
-    "Hebreos":13,"Santiago":5,"1 San Pedro":5,"2 San Pedro":3,"1 San Juan":5,"2 San Juan":1,
-    "3 San Juan":1,"Judas":1,"Apocalipsis":22
+  const books = {
+    "San Mateo": 28, "San Marcos": 16, "San Lucas": 24, "San Juan": 21, "Hechos": 28, "Romanos": 16,
+    "1 Corintios": 16, "2 Corintios": 13, "Galatas": 6, "Efesios": 6, "Filipenses": 4, "Colosenses": 4,
+    "1 Tesalonicenses": 5, "2 Tesalonicenses": 3, "1 Timoteo": 6, "2 Timoteo": 4, "Tito": 3, "Filemon": 1,
+    "Hebreos": 13, "Santiago": 5, "1 San Pedro": 5, "2 San Pedro": 3, "1 San Juan": 5, "2 San Juan": 1,
+    "3 San Juan": 1, "Judas": 1, "Apocalipsis": 22
   };
-  const baseUrl='https://raw.githubusercontent.com/geluksee/hope/main/';
-  const audio=new Audio();
-  let currentTrackIndex=0,isPlaying=false,repeat=false,tracks=[];
-  const playlist=$("#playlist");
-  let trackCounter=0; 
-  for(const [book,chapters] of Object.entries(books)){
-    for(let c=1;c<=chapters;c++){
-      trackCounter++;
-      const urlBookName=book.replace(/ /g,'_');
-      const chapterPadded=String(c).padStart(2,'0');
-      const trackUrl=`${baseUrl}${trackCounter}_${urlBookName}_${chapterPadded}.mp3`;
-      tracks.push({book,chapter:c,title:`${book} - Capitulo ${c}`,index:trackCounter-1,url:trackUrl});
-      playlist.append(`<div class="playlist-item" data-index="${trackCounter-1}"><span class="number">${trackCounter}</span><span class="title">${book} - Capitulo ${c}</span></div>`);
-    }
-  }
-  const formatTime=s=>isNaN(s)?"0:00":Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,'0');
-  function loadTrack(i){if(i<0||i>=tracks.length)return;currentTrackIndex=i;audio.src=tracks[i].url;$('#currentTrack').text(tracks[i].title);$('.playlist-item').removeClass('active');$(`.playlist-item[data-index="${i}"]`).addClass('active');}
-  function playTrack(){audio.play().then(()=>{isPlaying=true;$('#playBtn').html('<svg viewBox="0 0 24 24"><rect/><rect x="8" y="6" width="3" height="12"/><rect x="13" y="6" width="3" height="12"/></svg>');}).catch(e=>console.log(e));}
-  function pauseTrack(){audio.pause();isPlaying=false;$('#playBtn').html('<svg viewBox="0 0 24 24"><rect/><polygon points="8,6 20,12 8,18"/></svg>');}
-  function prevTrack(){if(currentTrackIndex>0){loadTrack(currentTrackIndex-1);playTrack();}}
-  function nextTrack(){if(currentTrackIndex<tracks.length-1){loadTrack(currentTrackIndex+1);playTrack();}else if(repeat){loadTrack(0);playTrack();}}
-  // Actualizar tiempo
-  $(audio).on('timeupdate',()=>{const c=audio.currentTime,d=audio.duration;$('#currentTime').text(formatTime(c));$('#duration').text(formatTime(d));$('.progress').css('width',((c/d)*100)+'%');});
-  $(audio).on('ended',()=>{repeat?(loadTrack(currentTrackIndex),playTrack()):nextTrack();});
-  $(audio).on('loadedmetadata',()=>{$('#duration').text(formatTime(audio.duration));});
-  // Controles básicos
-  $('#playBtn').click(()=>{if(!audio.src)loadTrack(0);isPlaying?pauseTrack():playTrack();});
-  $('#prevBtn').click(prevTrack);
-  $('#nextBtn').click(nextTrack);
-  $('#repeatBtn').click(function(){repeat=!repeat;$(this).toggleClass('pya');});
-  // Progreso al hacer click
-  $('.progress-bar').click(e=>{const w=$(e.currentTarget).width();audio.currentTime=(e.offsetX/w)*audio.duration;});
-  // Control de volumen con barra
-  let isMuted=false;
-  function updateVolumeBar(vol){
-    $('.volume-level').css('width',(vol*100)+'%');
-  }
-  audio.volume=1;
-  updateVolumeBar(audio.volume);
-  $('.volume-bar').click(e=>{
-    const w=$(e.currentTarget).width();
-    const clickX=e.offsetX;
-    const vol=clickX/w;
-    audio.volume=vol;
-    if(isMuted&&vol>0){
-      isMuted=false;$('#muteBtn').html('<svg viewBox="0 0 24 24"><rect/><polygon points="6,8 10,8 14,4 14,20 10,16 6,16"/><path d="M15 9a2 3 0 0 1 0 6" stroke-width="2"/><path d="M18 7.7a2 3 0 0 1 0 9" stroke-width="2"/></svg>');
-      audio.muted=false;
-    }
-    updateVolumeBar(vol);
-  });
-  $('#muteBtn').click(()=>{
-    isMuted=!isMuted;
-    audio.muted=isMuted;
-    $('#muteBtn').html(isMuted?'<svg viewBox="0 0 24 24"><rect/><polygon points="6,8 10,8 14,4 14,20 10,16 6,16"/></svg>':'<svg viewBox="0 0 24 24"><rect/><polygon points="6,8 10,8 14,4 14,20 10,16 6,16"/><path d="M15 9a2 3 0 0 1 0 6" stroke-width="2"/><path d="M18 7.7a2 3 0 0 1 0 9" stroke-width="2"/></svg>');
-    updateVolumeBar(isMuted?0:audio.volume);
-  });
-  // Selección de track en la lista
-  $(document).on('click','.playlist-item',function(){
-    loadTrack(parseInt($(this).data('index')));
-    playTrack();
-    saveCurrentTrack();
-  });
-  // Filtro de búsqueda
-  $('#searchInput').on('input',function(){
-    const query=$(this).val().toLowerCase();
-    $('.playlist-item').each(function(){
-      const text=$(this).text().toLowerCase();
-      $(this).toggle(text.includes(query));
+  
+  const baseUrl = 'https://raw.githubusercontent.com/geluksee/hope/main/';
+  const audio = new Audio();
+  const state = { idx: 0, playing: false, repeat: false, firstPlay: true };
+  const tracks = [];
+  
+  // Generar playlist
+  Object.entries(books).forEach(([book, chapters], i) => {
+    Array.from({ length: chapters }, (_, c) => {
+      const tc = tracks.length + 1;
+      const url = `${baseUrl}${tc}_${book.replace(/\s/g, '_')}_${String(c + 1).padStart(2, '0')}.mp3`;
+      tracks.push({ book, chapter: c + 1, title: `${book} - Capítulo ${c + 1}`, url });
+      $('#pls').append(`<div class="pi" data-i="${tc - 1}"><span class="n">${tc}</span><span class="t">${book} - Capítulo ${c + 1}</span></div>`);
     });
   });
-  // Guardando en LocalStorage 
-  function saveCurrentTrack(){
-    localStorage.setItem('currentTrackIndex', currentTrackIndex);
-  }
-  $(audio).on('ended',saveCurrentTrack);
-  $('#nextBtn,#prevBtn,#repeatBtn,#playBtn').click(saveCurrentTrack);
-  // Obteniendo en LocalStorage 
-  const savedTrack=localStorage.getItem('currentTrackIndex');
-  if(savedTrack!==null){
-    const idx=parseInt(savedTrack);
-    if(!isNaN(idx)&&idx>=0&&idx<tracks.length){
-      loadTrack(idx);
-    }
-  }
-// HACIENDO PAUSE Y WAVE PARA ANIMACIONES 
-$('.visualizer').click(()=>isPlaying?pauseTrack():playTrack()).html(`<div class="wave">${'<div class="wave-bar"></div>'.repeat(20)}</div>`)
 
+  const fmt = s => isNaN(s) ? '0:00' : `${~~(s / 60)}:${String(~~(s % 60)).padStart(2, '0')}`;
+  const updateVol = vol => $('.vl').css('width', `${vol * 100}%`);
+  const toggleWave = on => $('.wvs').toggleClass('playing', on);
+  
+  const load = i => {
+    if (i < 0 || i >= tracks.length) return;
+    state.idx = i;
+    audio.src = tracks[i].url;
+    $('#ct').text(tracks[i].title);
+    $('.pi').removeClass('active').eq(i).addClass('active')[0]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    !state.firstPlay && Notificacion(`📖 ${tracks[i].title}`, 'info', 2000);
+    saveState();
+  };
+
+  const play = () => {
+    !audio.src && load(0);
+    audio.play().then(() => {
+      Object.assign(state, { playing: true, firstPlay: false });
+      $('#play i').attr('class', 'fas fa-pause');
+      toggleWave(true);
+    }).catch(() => Notificacion('Error al reproducir', 'error'));
+  };
+
+  const pause = () => {
+    audio.pause();
+    state.playing = false;
+    $('#play i').attr('class', 'fas fa-play');
+    toggleWave(false);
+  };
+
+  const nav = dir => {
+    const next = state.idx + dir;
+    if (next >= 0 && next < tracks.length) { load(next); play(); }
+    else if (next >= tracks.length) { load(0); play(); }
+  };
+
+  // Eventos audio
+  $(audio).on({
+    timeupdate: () => {
+      const { currentTime: c, duration: d } = audio;
+      $('#cur').text(fmt(c));
+      $('#dur').text(fmt(d));
+      $('.pg').css('width', `${(c / d) * 100}%`);
+    },
+    ended: () => state.repeat ? (load(state.idx), play()) : nav(1),
+    loadedmetadata: () => $('#dur').text(fmt(audio.duration))
+  });
+
+  // Controles
+  const actions = {
+    play: () => state.playing ? pause() : play(),
+    prev: () => nav(-1),
+    next: () => nav(1),
+    rep: function() {
+      state.repeat = !state.repeat;
+      $(this).toggleClass('active');
+      saveState();
+    },
+    full: () => {
+      const el = $('#audioPlayer')[0];
+      const fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+      !fs 
+        ? (el.requestFullscreen?.() || el.webkitRequestFullscreen?.() || el.mozRequestFullScreen?.())
+        : (document.exitFullscreen?.() || document.webkitExitFullscreen?.() || document.mozCancelFullScreen?.());
+    },
+    mute: () => {
+      audio.muted = !audio.muted;
+      $('#mute i').toggleClass('fa-volume-high fa-volume-xmark');
+      updateVol(audio.muted ? 0 : audio.volume);
+    }
+  };
+
+  Object.entries(actions).forEach(([id, fn]) => $(`#${id}`).on('click', fn));
+
+  // Fullscreen icon toggle
+  $(document).on('fullscreenchange webkitfullscreenchange mozfullscreenchange', () => {
+    const fs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement);
+    $('#full i').attr('class', `fas fa-${fs ? 'compress' : 'expand'}`);
+  });
+
+  // Progress bar
+  $('.pgb').on('click', e => audio.currentTime = (e.offsetX / e.currentTarget.offsetWidth) * audio.duration);
+
+  // Volume bar
+  $('.vb').on('click', e => {
+    const vol = e.offsetX / e.currentTarget.offsetWidth;
+    audio.volume = vol;
+    audio.muted = false;
+    $('#mute i').attr('class', 'fas fa-volume-high');
+    updateVol(vol);
+    saveState();
+  });
+
+  // Playlist & Search
+  $(document).on('click', '.pi', function() { load(+$(this).data('i')); play(); });
+  $('#src').on('input', e => {
+    const q = e.target.value.toLowerCase();
+    $('.pi').each((_, el) => $(el).toggle(el.textContent.toLowerCase().includes(q)));
+  });
+
+  // Keyboard shortcuts
+  $(document).on('keydown', e => {
+    if (e.target.tagName === 'INPUT') return;
+    const keys = {
+      Space: () => (e.preventDefault(), state.playing ? pause() : play()),
+      ArrowLeft: () => nav(-1),
+      ArrowRight: () => nav(1),
+      ArrowUp: () => (e.preventDefault(), audio.volume = Math.min(1, audio.volume + 0.1), updateVol(audio.volume), saveState()),
+      ArrowDown: () => (e.preventDefault(), audio.volume = Math.max(0, audio.volume - 0.1), updateVol(audio.volume), saveState())
+    };
+    keys[e.code]?.() || keys[e.key]?.();
+  });
+
+  // Persistencia
+  const saveState = () => {
+    savels('audioActual', state.idx, 168);
+    savels('aVolumen', audio.volume, 168);
+    savels('aRepetir', state.repeat, 168);
+  };
+
+  const loadState = () => {
+    const saved = getls('audioActual');
+    saved >= 0 && saved < tracks.length && load(saved);
+    
+    const vol = getls('aVolumen');
+    vol && (audio.volume = vol, updateVol(vol));
+    
+    getls('aRepetir') && (state.repeat = true, $('#rep').addClass('active'));
+  };
+
+  loadState();
+  
+  // Wave click
+  $('#viz').on('click', () => state.firstPlay && !audio.src ? (load(0), play()) : state.playing ? pause() : play());
 };
