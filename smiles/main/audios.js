@@ -157,19 +157,6 @@ export const wiAudios = () => {
     $('.pi').each((_, el) => $(el).toggle(el.textContent.toLowerCase().includes(q)));
   });
 
-  // Keyboard shortcuts
-  $(document).on('keydown', e => {
-    if (e.target.tagName === 'INPUT') return;
-    const keys = {
-      Space: () => (e.preventDefault(), state.playing ? pause() : play()),
-      ArrowLeft: () => nav(-1),
-      ArrowRight: () => nav(1),
-      ArrowUp: () => (e.preventDefault(), audio.volume = Math.min(1, audio.volume + 0.1), updateVol(audio.volume), saveState()),
-      ArrowDown: () => (e.preventDefault(), audio.volume = Math.max(0, audio.volume - 0.1), updateVol(audio.volume), saveState())
-    };
-    keys[e.code]?.() || keys[e.key]?.();
-  });
-
   // Persistencia
   const saveState = () => {
     savels('audioActual', state.idx, 168);

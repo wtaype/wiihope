@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { db } from '../../firebase/init.js';
-import { collection, query, orderBy, doc, setDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp , where} from 'firebase/firestore';
+import { collection, query, orderBy, doc, setDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp , where, getDocs} from 'firebase/firestore';
 import { getls, savels, removels, Notificacion, abrirModal, wiDate, cerrarTodos, wiSpin } from '../widev.js';
 
 export const wiCitas = () => {
@@ -202,13 +202,13 @@ const renderFrases = () => {
     ),
     (snap) => {
       const publicas = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      
       // Si hay usuario, agregar sus frases privadas
       if (smile?.email) {
-        getDocs(query(collection(db, 'wicitas'), where('email', '==', smile.email), where('publico', '==', false)))
+        getDocs(query(collection(db, 'wicitas'), where('email', '==', smile.email)))
           .then(snapPrivado => {
-            const privadas = snapPrivado.docs.map(d => ({ id: d.id, ...d.data() }));
-            frases = [...publicas, ...privadas].sort((a, b) => (b.favorito - a.favorito) || (a.orden || 0) - (b.orden || 0));
+            const misFrases = snapPrivado.docs.map(d => ({ id: d.id, ...d.data() }));
+            const todasPublicas = publicas.filter(p => p.email !== smile.email);
+            frases = [...todasPublicas, ...misFrases].sort((a, b) => (b.favorito - a.favorito) || (a.orden || 0) - (b.orden || 0));
             savels('wiFrases', frases);
             renderFrases();
           });
