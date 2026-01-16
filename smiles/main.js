@@ -8,8 +8,12 @@ export const init = async () => {
     const { wiCitas } = await import('./main/citas.js'); wiCitas();
   });
   
-  wiVista('#audioPlayer', async () => {
+  wiVista('#biblia', async () => {
     const { wiAudios } = await import('./main/audios.js'); wiAudios();
+  }); 
+  
+  wiVista('#musica', async () => {
+    const { wiMusica } = await import('./main/musica.js'); wiMusica();
   });
   
   wiVista('#acerca', async () => {

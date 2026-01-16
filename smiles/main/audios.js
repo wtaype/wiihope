@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { savels, getls, Notificacion } from '../widev.js';
 
 export const wiAudios = () => {
-  $('#audioPlayer').html(`
+  $('#biblia').html(`
 <div class='mwb go3'>
 <div class='plyr'>
 <div class='viz' id='viz'><div class='wave'>${'<div class="wvs"></div>'.repeat(30)}</div></div>
@@ -116,7 +116,7 @@ export const wiAudios = () => {
       saveState();
     },
     full: () => {
-      const el = $('#audioPlayer')[0];
+      const el = $('#biblia')[0];
       const fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
       !fs 
         ? (el.requestFullscreen?.() || el.webkitRequestFullscreen?.() || el.mozRequestFullScreen?.())
