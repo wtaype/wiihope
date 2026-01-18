@@ -332,7 +332,6 @@
   border-radius: 1.5vh;
   box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-height: 75vh;
   overflow-y: auto;
 }
 
