@@ -1,4 +1,4 @@
-name: 🚀 Deploy to GitHub Pages + Firebase
+name: 🚀 wiihope Deploy to GitHub Pages + Firebase 
 
 on:
   push:
@@ -8,17 +8,15 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 📦 Setup Node.js
+      - name: 📦 Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -27,34 +25,34 @@ jobs:
       - name: 📚 Install dependencies
         run: npm ci
 
-      # 🏗️ UN SOLO BUILD con claves Firebase
-      - name: Build Application
-        run: npm run build -- --base=${{ github.ref_type == 'tag' && format('/wiihope/{0}/', github.ref_name) || '/wiihope/' }}
-        env:
-          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
-          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
-          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
-          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
-          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+      - name: 🎯 Determine Base URL
+        run: |
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            echo "BASE_URL=/wiihope/${{ github.ref_name }}/" >> $GITHUB_ENV
+            echo "DESTINATION_DIR=${{ github.ref_name }}" >> $GITHUB_ENV
+            echo "IS_TAG=true" >> $GITHUB_ENV
+          else
+            echo "BASE_URL=/wiihope/" >> $GITHUB_ENV
+            echo "DESTINATION_DIR=." >> $GITHUB_ENV
+            echo "IS_TAG=false" >> $GITHUB_ENV
+          fi
 
-      # 🐙 Deploy a GitHub Pages
-      - name: Deploy to GitHub Pages
+      # 🎨 GitHub Pages: SIN claves Firebase
+      - name: 🏗️ Build for GitHub Pages (Demo Mode)
+        run: npm run build -- --base=${{ env.BASE_URL }}
+
+      - name: 🐙 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          destination_dir: ${{ github.ref_type == 'tag' && github.ref_name || '.' }}
+          destination_dir: ${{ env.DESTINATION_DIR }}
           keep_files: true
 
-      # 🔥 Deploy a Firebase (solo main branch)
-      - name: Deploy to Firebase
-        if: github.ref == 'refs/heads/main'
-        run: |
-          # Re-build con base path correcto para Firebase
-          npm run build -- --base=/
-          npm install -g firebase-tools@latest
-          firebase deploy --only hosting --project wiihope --token "${{ secrets.FIREBASE_TOKEN }}"
+      # 🔥 Firebase: CON claves
+      - name: 🏗️ Build for Firebase (Full Auth)
+        if: env.IS_TAG == 'false'
+        run: npm run build -- --base=/
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
@@ -63,12 +61,8 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
 
-      - name: 🎉 Success
+      - name: 🔥 Deploy to Firebase
+        if: env.IS_TAG == 'false'
         run: |
-          echo "✅ Deploy completado!"
-          if [[ "${{ github.ref_type }}" == "tag" ]]; then
-            echo "🏷️ GitHub Pages: https://wtaype.github.io/wiihope/${{ github.ref_name }}"
-          else
-            echo "🔥 Firebase: https://wiihope.web.app (Auth funcional)"
-            echo "🐙 GitHub Pages: https://wtaype.github.io/wiihope (Solo diseño)"
-          fi
+          npm install -g firebase-tools@latest
+          firebase deploy --only hosting --project wiihope --token "${{ secrets.FIREBASE_TOKEN }}"
