@@ -1,13 +1,16 @@
-// 🚨 SOLO permite Firebase en dominio oficial
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
+// 🔐 Control de dominios autorizados (Comentar línea para deshabilitar restricción)
 const ALLOWED_DOMAINS = ['wiihope.web.app', 'localhost'];
 
-const currentDomain = window.location.hostname;
+let auth = null;
+let db = null;
 
-if (!ALLOWED_DOMAINS.includes(currentDomain)) {
-  console.warn('🚫 Firebase deshabilitado en este dominio');
-  export const auth = null;
-  export const db = null;
-} else {
+const isAllowed = !ALLOWED_DOMAINS || ALLOWED_DOMAINS.includes(window.location.hostname);
+
+if (isAllowed) {
   const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -18,6 +21,10 @@ if (!ALLOWED_DOMAINS.includes(currentDomain)) {
   };
 
   const app = initializeApp(firebaseConfig);
-  export const auth = getAuth(app);
-  export const db = getFirestore(app);
+  auth = getAuth(app);
+  db = getFirestore(app);
+} else {
+  console.warn('🚫 Firebase deshabilitado en este dominio:', window.location.hostname);
 }
+
+export { auth, db };
