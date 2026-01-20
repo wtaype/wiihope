@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-const permitir = new Set(['wiihope.web.app', 'localhost']);
+const permitir = new Set(['wiihope.web.app', 'localhost', 'wtaype.github.io']); //Agregar 'wtaype.github.io'
 const permitido = permitir.has(window.location.hostname);
 
 const app = permitido ? initializeApp({
