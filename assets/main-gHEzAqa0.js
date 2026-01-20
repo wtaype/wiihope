@@ -1,6 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/citas-BQEAhpMy.js","assets/jquery-DduPepyT.js","assets/vendor-B2AETYxa.js","assets/init-DcKKffQQ.js","assets/firebase-B8KvrrVe.js","assets/widev-C5pE0C-0.js","assets/audios-BfUSvCGg.js","assets/acerca-qZld_CNv.js"])))=>i.map(i=>d[i]);
-import{_ as i}from"./main-DS6fWfK5.js";import{$ as s}from"./jquery-DduPepyT.js";import{wiVista as t}from"./widev-C5pE0C-0.js";import"./vendor-B2AETYxa.js";const r=async()=>{s("#wiMainContent").html(`
-    <div class="phrs mwb dpw frases" id="frases"></div>
-    <div class="mp3 audio" id="audioPlayer"></div>
-    <div class="about awb mwb dpvc" id="acerca"></div>
-  `).children().css("opacity",0).animate({opacity:1},400)},d=async()=>{await r(),t("#frases",async()=>(await i(async()=>{const{wiCitas:a}=await import("./citas-BQEAhpMy.js");return{wiCitas:a}},__vite__mapDeps([0,1,2,3,4,5]))).wiCitas()),t("#audioPlayer",async()=>(await i(async()=>{const{wiAudios:a}=await import("./audios-BfUSvCGg.js");return{wiAudios:a}},__vite__mapDeps([6,1,2]))).wiAudios()),t("#acerca",async()=>(await i(async()=>{const{wiAcerca:a}=await import("./acerca-qZld_CNv.js");return{wiAcerca:a}},__vite__mapDeps([7,1,2,5]))).wiAcerca())},w=()=>s("#wiMainContent").empty();export{w as cleanup,d as init,r as render};

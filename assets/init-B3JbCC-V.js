@@ -1,1 +1,0 @@
-import{p as a,r as i,t as p}from"./firebase-BYecq-Vp.js";const t={apiKey:"AIzaSyBjxEEEZ83B7wSwHlNNHjhdxna_XOyEWwU",authDomain:"wiihope.firebaseapp.com",projectId:"wiihope",storageBucket:"wiihope.firebasestorage.app",messagingSenderId:"966620743950",appId:"1:966620743950:web:0e7770708166ba08e66f5f"},e=i(t),s=a(e),r=p(e);export{s as a,r as d};
