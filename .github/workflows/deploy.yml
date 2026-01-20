@@ -33,9 +33,16 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '20', cache: 'npm' }
       - run: npm ci
-      - run: |
-          [[ "${{ github.ref_type }}" == "tag" ]] && echo "BASE_URL=/wiihope/${{ github.ref_name }}/" >> $GITHUB_ENV && echo "DEST_DIR=${{ github.ref_name }}" >> $GITHUB_ENV || echo "BASE_URL=/wiihope/" >> $GITHUB_ENV && echo "DEST_DIR=." >> $GITHUB_ENV
-      - run: npm run build -- --base=${{ env.BASE_URL }}
+      - name: Set paths
+        run: |
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            echo "BASE_URL=/wiihope/${{ github.ref_name }}/" >> $GITHUB_ENV
+            echo "DEST_DIR=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "BASE_URL=/wiihope/" >> $GITHUB_ENV
+            echo "DEST_DIR=." >> $GITHUB_ENV
+          fi
+      - run: npm run build -- --base="${{ env.BASE_URL }}"
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
@@ -44,4 +51,8 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
       - uses: peaceiris/actions-gh-pages@v4
-        with: { github_token: '${{ secrets.GITHUB_TOKEN }}', publish_dir: './dist', destination_dir: '${{ env.DEST_DIR }}', keep_files: true }
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          destination_dir: ${{ env.DEST_DIR }}
+          keep_files: true
