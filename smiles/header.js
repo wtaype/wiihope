@@ -1,4 +1,4 @@
-import './wiauth.js';
+import './auth/wiauth.js';
 import $ from 'jquery';
 import { getls, removels, Mensaje } from './widev.js';
 
@@ -25,7 +25,7 @@ export const header = (() => {
   async function cargandoPersonal(wi) {
     personal(wi);
 //ACTUALIZAR CAMBIOS EN TIEMPO REAL
-    const { auth, onAuthStateChanged } = await import('./wiauth.js');
+    const { auth, onAuthStateChanged } = await import('./auth/wiauth.js');
     onAuthStateChanged(auth, user => {
       if (!user) return removels('wiSmile'), publico();
     });
@@ -33,7 +33,7 @@ export const header = (() => {
     window.addEventListener('wiFresh', (e) => cargandoPersonal(e.detail));
 //CERRAR SESSIÓN
   $(document).on('click', '.bt_salir', async () => {
-    const { auth, signOut } = await import('./wiauth.js');
+    const { auth, signOut } = await import('./auth/wiauth.js');
     await signOut(auth); location.reload();
     removels('wiSmile wiFlags');
   });

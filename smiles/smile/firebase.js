@@ -1,8 +1,9 @@
+import { id, ipdev } from '../wii.js';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-const permitir = new Set(['wiihope.web.app', 'localhost']); // 'wtaype.me' <- agregar para ver en github pages
+const permitir = new Set([`${id}.web.app`, ipdev, 'localhost']); 
 const permitido = permitir.has(window.location.hostname);
 
 const app = permitido ? initializeApp({

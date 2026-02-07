@@ -1,6 +1,6 @@
 import './musica.css';
 import $ from 'jquery';
-import { db } from '../../firebase/init.js';
+import { db } from '../smile/firebase.js';
 import { collection, query, orderBy, doc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, setDoc, where, getDocs } from 'firebase/firestore';
 import { savels, getls, removels, Notificacion, wiSpin } from '../widev.js';
 

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { db } from '../../firebase/init.js';
+import { db } from '../smile/firebase.js';
 import { collection, query, orderBy, doc, setDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp , where, getDocs} from 'firebase/firestore';
 import { getls, savels, removels, Notificacion, abrirModal, wiDate, cerrarTodos, wiSpin } from '../widev.js';
 

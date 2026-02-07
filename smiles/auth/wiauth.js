@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import { auth, db } from '../firebase/init.js';
+import { auth, db } from '../smile/firebase.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification, sendPasswordResetEmail, onAuthStateChanged, signOut } from 'firebase/auth';
 import { setDoc, getDoc, doc, query, where, getDocs, collection, serverTimestamp } from 'firebase/firestore';
-import { wiTip, Mensaje, savels, getls, wiSpin, abrirModal, cerrarModal } from './widev.js';
+import { wiTip, Mensaje, savels, getls, wiSpin, abrirModal, cerrarModal } from '../widev.js';
 
 export { auth, onAuthStateChanged, signOut };
 export function wiAuth() {
@@ -140,7 +140,7 @@ const eventos = () => {
       await Promise.all([updateProfile(user, { displayName: usuario }), sendEmailVerification(user)]);
       const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid, terminos: true, tema:localStorage.wiTema};
       await setDoc(doc(db, cfg.db, usuario), { ...widatos, creado: serverTimestamp() });
-      (await import('./header.js')).personal(widatos); // Header personalizado
+      (await import('../header.js')).personal(widatos); // Header personalizado
     } catch (error) {
       const errores = { 'auth/email-already-in-use': 'Email ya registrado', 'auth/weak-password': 'Contraseña débil' };
       Mensaje(errores[error.code] || error.message, 'error'); console.error(error);
