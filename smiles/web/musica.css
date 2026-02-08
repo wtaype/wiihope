@@ -33,7 +33,7 @@
 .mus_pi{display:flex;align-items:center;gap:1.5vh;padding:1.5vh;border-radius:0.8vh;cursor:pointer;transition:all var(--tr_f);background:transparent;border-left:0.3vh solid transparent}
 .mus_pi:hover{background:var(--bg4);border-left-color:var(--mco);transform:translateX(0.5vh)}
 .mus_pi.active{background:linear-gradient(90deg,var(--bg5),transparent);border-left-color:var(--mco);font-weight:600;box-shadow:0 0.2vh 0.8vh rgba(0,0,0,0.05)}
-.mus_pi.fav{background:linear-gradient(90deg,rgba(255,193,7,0.12),transparent)}
+.mus_pi.fav{background:var(--bg4)}
 .mus_n{font-size:var(--fz_m);font-weight:700;color:var(--tx3);min-width:3vh;text-align:center;font-family:var(--ff_G)}
 .mus_pi.active .mus_n{color:var(--mco)}
 .mus_pi_info{flex:1;display:flex;flex-direction:column;gap:0.3vh;overflow:hidden}
