@@ -215,7 +215,7 @@ const tema =  localStorage.wiTema, usuario = getls('wiSmile'), nombreTema = tema
   if (usuario) {
     try {
       await setDoc(doc(db, cfg.db, usuario.usuario), { tema, actualizado: serverTimestamp() }, { merge: true });
-      Mensaje(`Tema ${nombreTema} Guardado ✅`);
+      Mensaje(`Tema ${nombreTema} Guardado!`);
     } catch (e){ console.error(e); }
   }
 });

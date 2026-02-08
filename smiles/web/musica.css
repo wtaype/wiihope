@@ -78,7 +78,7 @@
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width:770px){
-.mus_container.autenticado{grid-template-columns:1fr}
+.mus_container.autenticado{grid-template-columns:1fr; display: block;}
 .mus_player{padding:1.5vh}
 .mus_ctrl{width:4vh;height:4vh;font-size:var(--fz_m)}
 .mus_play{width:5vh;height:5vh;font-size:var(--fz_m3)}
