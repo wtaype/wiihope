@@ -3,7 +3,7 @@ export let id = 'wiihope'
 export let app = 'WiiHope'
 export let lanzamiento = 2024;
 export let autor = '@wilder.taype';
-export let ipdev = '192.168.18.234';
+export let ipdev = '192.168.18.62';
 export let link = 'https://wtaype.github.io/';
 export let version = 'v28';
 

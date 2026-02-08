@@ -2,7 +2,7 @@
 .acerca_container{width:100%;margin:0 auto;padding:2vh 0}
 
 /* ==================== HERO ==================== */
-.acerca_hero{text-align:center;padding:4vh 2vh 3vh;background:linear-gradient(135deg,var(--bg2),var(--hv));border-radius:1.5vh 1.5vh 0 0;margin-bottom:3vh;box-shadow:0 0.5vh 2vh rgba(0,0,0,0.15)}
+.acerca_hero{text-align:center;padding:4vh 2vh 3vh;background:var(--mbg);border-radius:1.5vh 1.5vh 0 0;margin-bottom:3vh;box-shadow:0 0.5vh 2vh rgba(0,0,0,0.15)}
 .acerca_hero h1{font-size:var(--fz_x1);color:var(--F);margin-bottom:1vh;font-weight:700;display:flex;align-items:center;justify-content:center;gap:1vh;font-family:var(--ff_R);text-shadow:0 0.2vh 0.5vh rgba(0,0,0,0.2)}
 .acerca_hero h1 i{color:var(--F);font-size:var(--fz_x1);animation:heartbeat 1.5s ease-in-out infinite}
 @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
@@ -41,7 +41,7 @@
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width:768px){
-.acerca_container{padding:1.5vh 2vw}
+.acerca_container{padding:0}
 .acerca_hero{padding:3vh 2vh 2vh;margin-bottom:2vh}
 .acerca_hero h1{font-size:var(--fz_l2);flex-direction:column;gap:0.5vh}
 .acerca_hero p{font-size:var(--fz_m2)}

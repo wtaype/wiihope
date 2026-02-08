@@ -7,7 +7,7 @@
 .mus_lista{display:flex;flex-direction:column;gap:2vh}
 
 /* ==================== PLAYER ==================== */
-.mus_player{background:linear-gradient(135deg,var(--bg2),var(--hv));border-radius:1.5vh;padding:2vh;box-shadow:0 0.5vh 2vh rgba(0,0,0,0.2);display:flex;flex-direction:column;gap:1.5vh}
+.mus_player{background:var(--mbg);border-radius:1.5vh;padding:2vh;box-shadow:0 0.5vh 2vh rgba(0,0,0,0.2);display:flex;flex-direction:column;gap:1.5vh}
 .mus_player_info{text-align:center}
 .mus_player_info span{color:var(--F);font-size:var(--fz_m3);font-weight:700;font-family:var(--ff_R);display:block;text-shadow:0 0.2vh 0.5vh rgba(0,0,0,0.2)}
 .mus_player_ctrls{display:flex;justify-content:center;align-items:center;gap:2vh;flex-wrap:wrap}

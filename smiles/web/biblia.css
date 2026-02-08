@@ -74,11 +74,12 @@
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width:768px){
+.biblia_container{padding: 1vh 0;}
 .biblia_hero h1{font-size:var(--fz_l2);flex-direction:column;gap:0.5vh}
 .biblia_hero p{font-size:var(--fz_m2)}
 .biblia_layout{grid-template-columns:1fr;grid-template-rows:auto auto;height:auto;gap:2vh}
 .audio_canvas{min-height:30vh}
-.player_controls{gap:1.5vh;padding:1.5vh;flex-direction:column}
+.player_controls{gap:1.5vh;padding:1.5vh;}
 .btn_control{width:4.5vh;height:4.5vh}
 .btn_play{width:5.5vh;height:5.5vh}
 .volume_control{width:100%;justify-content:center}

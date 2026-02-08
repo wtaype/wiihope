@@ -72,6 +72,7 @@
   --hv:#00a8e6;
   --hva:#1873cd;
   --mco:#1978d7;
+  --mbg:#1978d7;
   --brd:#b8d9eb;
   --inp:#f0f9ff;
   --bg1:#ffffff26;
@@ -95,6 +96,7 @@
   --hv:#ff7a85;
   --hva:#ff3849;
   --mco:#ff3849;
+  --mbg:#ff3849;
   --brd:#ffb3ba;
   --inp:#fff5f6;
   --bg1:#ffffff61;
@@ -118,6 +120,7 @@
   --hv:#3cd741;
   --hva:#25b62a;
   --mco:#25b62a;
+  --mbg:#25b62a;
   --brd:#a8e6ab;
   --inp:#f0fff1;
   --bg1:#ffffff42;
@@ -141,6 +144,7 @@
   --hv:#9442ff;
   --hva:#5f00db;
   --mco:#6a00f5;
+  --mbg:#6a00f5;
   --brd:#c9a3ff;
   --inp:#faf5ff;
   --bg1:#ffffff61;
@@ -164,6 +168,7 @@
   --hv:#00d4ff;
   --hva:#00f3ff;
   --mco:#00f3ff;
+  --mbg:#0a0e1a;
   --brd:#2d3a52;
   --inp:#0f1421;
   --bg1:rgba(0,243,255,0.08);
@@ -179,23 +184,22 @@
 *{font-family:var(--ff_P);scrollbar-width:thin;scrollbar-color:var(--mco) var(--bg)}
 a{text-decoration:none}
 body{background: var(--bg);}
-#wimain{max-width:87vw;margin:auto;padding:2vh 1vh}
+#wimain{max-width:87vw;margin:auto;padding:2vh .6vh}
 /* ==================== TEMAS ==================== */
-#wiTema{display:flex;gap:0.2vh;padding:0.5vh 0.8vw;background:var(--bg1);border-radius:0.8vh;position:fixed;flex-direction:column;top:38vh;left:0;z-index:1;}
-.tema{width:3vh;height:2.9vh;border-radius:50%;cursor:pointer;transition:all var(--tr_f);border:2px solid transparent;position:relative}
-.tema:hover{transform:scale(1.15);box-shadow:0 0 1vh rgba(0,0,0,0.3)}
-.tema.mtha{border-color:var(--F);box-shadow:0 0 1.5vh rgba(255,255,255,0.6),inset 0 0 0.5vh rgba(255,255,255,0.3);transform:scale(1.2)}
+#wiTema{display:flex;gap:0.2vh;padding:0.5vh 0.35vw;background:var(--bg1);border-radius:0.8vh;position:fixed;flex-direction:column;top:80vh;right:0;z-index:1;}
+.tema{width:var(--fz_l1);height:var(--fz_l1);border-radius:50%;cursor:pointer;transition:all var(--tr_f);border:2px solid transparent;position:relative}
+.tema:hover{transform:scale(1.01);box-shadow:0 0 1vh rgba(0,0,0,0.3)}
+.tema.mtha{border-color:var(--F);box-shadow:0 0 1.5vh rgba(255,255,255,0.6),inset 0 0 0.5vh rgba(255,255,255,0.3);transform:scale(1.01)}
 .tema[data-ths^="Cielo"]{background:var(--Cielo)}
 .tema[data-ths^="Dulce"]{background:var(--Dulce)}
 .tema[data-ths^="Paz"]{background:var(--Paz)}
 .tema[data-ths^="Mora"]{background:var(--Mora)}
 .tema[data-ths^="Futuro"]{background:var(--Futuro)}
 #wiTema:hover{transform:translateY(-0.2vh);transition:var(--tr_m)}
-/* ==================== FOOTER ==================== */
+/* ==================== HEADER - FOOTER ==================== */
+nav i{color:var(--mco)}
 .foo{width:100%;text-align:center;padding-block:1.5vh 1vh;background:var(--wb);border-radius:1vh 1vh 0 0}
-.foo *{font-size:var(--fz_s2);margin-inline:.3vh}
-.foo a{color:var(--bg2)}
-.foo i{color:var(--mco)}
+.foo *{font-size:var(--fz_s2);margin-inline:.3vh;color:var(--tx);}
 
 /* ==================== ESTILOS ESENCIALES HTML ==================== */
 section{padding:2vh 3vw;margin-bottom:2vh;background:var(--wb);border-radius:1vh;box-shadow:var(--bs_l)}
@@ -252,7 +256,6 @@ hr{border:none;border-top:1px solid var(--brd);margin:2vh 0}
 .winav{width:100%;flex-direction:column;gap:1vh}
 .menu{display:flex}
 .winav_item{width:auto;justify-content:center;padding:1.2vh 2vw}
-#wimain{padding:1.5vh 3vw}
 .wimenu{display: flex}
 }
 </style>

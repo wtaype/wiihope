@@ -98,12 +98,12 @@
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width:768px){
-.wicitas{padding:2vh 2vw}
+.wicitas{padding:2vh 0}
 .citas_hero{padding:3vh 0}
 .citas_hero h1{font-size:var(--fz_l2)}
 .citas_ctrl{flex-direction:column;align-items:stretch}
 .categorias_wrapper{flex-direction:column;width:100%}
-.categorias_list{width:100%;justify-content:center}
+.categorias_list{width:100%;justify-content:center;flex-direction: column;}
 .cat_btn{flex:1;justify-content:center;min-width:0}
 .citas_filtros{width:100%;flex-direction:column}
 .citas_orden,.citas_add{width:100%}
@@ -112,7 +112,7 @@
 .phr_acciones{top:1vh;left:1vh;gap:0.5vh}
 .phr_btn{padding:0.5vh 0.8vh;font-size:var(--fz_s1)}
 .phr_estrella{top:1vh;right:1vh;width:3vh;height:3vh;font-size:var(--fz_m2)}
-.phr_footer{flex-direction:column;align-items:flex-end;gap:0.5vh}
+.phr_footer{align-items:flex-end;gap:0.5vh}
 .form_row{grid-template-columns:1fr}
 .btn_load_more{width:90%;padding:1.5vh 0;font-size:var(--fz_m1)}
 .modal_body{padding:2vh 1.5vw}

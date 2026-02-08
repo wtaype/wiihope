@@ -11,7 +11,7 @@ nav a{color:var(--tx);transition:all var(--tr_f);text-decoration:none}
 .nvr button,.mpg{padding:0;background:transparent;border:none;cursor:pointer;color:var(--tx);font-weight:500;font-size:var(--fz_m2);transition:all var(--tr_f);text-decoration:none}
 .nvr button:hover,.mpg:hover{color:var(--mco);font-weight:600}
 .winav_item{display:flex;align-items:center;gap:0.8vh;color:var(--tx);font-weight:500;padding:0;text-decoration:none;transition:all var(--tr_f)}
-.winav_item i{font-size:var(--fz_m2);color:var(--tx2);transition:all var(--tr_f)}
+.winav_item i{font-size:var(--fz_m2);transition:all var(--tr_f)}
 .winav_item:hover{color:var(--mco);font-weight:600;}
 .winav_item:hover i{color:var(--mco);transform:scale(1.1)}
 .winav_item.active{color:var(--mco);font-weight:700}
