@@ -1,5 +1,22 @@
 import $ from 'jquery'; 
 
+// === 🧠 LOADER SECUENCIAL v14 ===
+export const wiLoad = (() => {
+  const carga = new Set(), opt = { rootMargin: '0px 0px -40% 0px', threshold: 0.15 };
+  return (id, fn) => {
+    const sel = id[0] === '#' ? id : `#${id}`; if (!$(sel).length) $('#wimain').append(`<div id="${id.replace('#','')}" style="min-height:86vh"></div>`);
+    const el = $(sel)[0];
+    el && new IntersectionObserver(([x]) => x.isIntersecting && (history.replaceState(null,'',sel), 
+    import('./wii.js').then(({ app }) => document.title = `${sel.slice(1).charAt(0).toUpperCase() + sel.slice(2)} - ${app}`), carga.has(sel) 
+    || (carga.add(sel), fn())), opt).observe(el);
+  };
+})();
+
+// === CLICK SUMA V10.1 ===
+export const wiSuma = (sel, fn, num = 5) => {
+  let cont = 0; $(document).on('click', sel, () => ++cont === num && (fn(), cont = 0));
+};
+
 // === 👁️ OBSERVER LAZY v11 ===
 export const wiVista = (sel, fn) => {
   const e = $(sel)[0];

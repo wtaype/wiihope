@@ -1,24 +1,11 @@
 import $ from 'jquery';
-import { wiVista } from './widev.js';
+import './header.js';
+import { wiLoad } from './widev.js';
 
-export const init = async () => {
-  $('#wiMainContent').children().css('opacity', 0).animate({ opacity: 1 }, 400);
-  
-  wiVista('#frases', async () => {
-    const { wiCitas } = await import('./main/citas.js'); wiCitas();
+['citas', 'biblia', 'musica', 'acerca'].forEach(v => {
+  wiLoad(`#${v}`, async () => {
+    const { [v]: fn } = await import(`./web/${v}.js`); fn();
   });
-  
-  wiVista('#biblia', async () => {
-    const { wiAudios } = await import('./main/audios.js'); wiAudios();
-  }); 
-  
-  wiVista('#musica', async () => {
-    const { wiMusica } = await import('./main/musica.js'); wiMusica();
-  });
-  
-  wiVista('#acerca', async () => {
-    const { wiAcerca } = await import('./main/acerca.js'); wiAcerca();
-  });
-};
+});
 
-export const cleanup = () => $('#wiMainContent').empty();
+import './footer.js';

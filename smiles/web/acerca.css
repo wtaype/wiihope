@@ -1,0 +1,66 @@
+/* ==================== CONTENEDOR PRINCIPAL ==================== */
+.acerca_container{width:100%;margin:0 auto;padding:2vh 0}
+
+/* ==================== HERO ==================== */
+.acerca_hero{text-align:center;padding:4vh 2vh 3vh;background:linear-gradient(135deg,var(--bg2),var(--hv));border-radius:1.5vh 1.5vh 0 0;margin-bottom:3vh;box-shadow:0 0.5vh 2vh rgba(0,0,0,0.15)}
+.acerca_hero h1{font-size:var(--fz_x1);color:var(--F);margin-bottom:1vh;font-weight:700;display:flex;align-items:center;justify-content:center;gap:1vh;font-family:var(--ff_R);text-shadow:0 0.2vh 0.5vh rgba(0,0,0,0.2)}
+.acerca_hero h1 i{color:var(--F);font-size:var(--fz_x1);animation:heartbeat 1.5s ease-in-out infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.acerca_hero p{font-size:var(--fz_m3);color:var(--F);opacity:0.95;max-width:600px;margin:0 auto;line-height:1.7;font-family:var(--ff_P);text-shadow:0 0.1vh 0.3vh rgba(0,0,0,0.2)}
+
+/* ==================== CONTENIDO ==================== */
+.acerca_content{background:var(--wb);border-radius:0 0 1.5vh 1.5vh;padding:3vh 4vh;box-shadow:0 0.5vh 2vh rgba(0,0,0,0.12)}
+.acerca_section{margin-bottom:3vh;padding-bottom:2.5vh;border-bottom:0.2vh solid var(--bg5);transition:all var(--tr_f)}
+.acerca_section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.acerca_section:hover{transform:translateX(0.5vh);padding-left:1vh}
+
+/* ==================== TÍTULOS ==================== */
+.acerca_section h3{font-size:var(--fz_m5);font-weight:700;color:var(--tx);margin-bottom:1.5vh;display:flex;align-items:center;gap:1vh;font-family:var(--ff_R)}
+.acerca_section h3 i{color:var(--mco);font-size:var(--fz_m4)}
+
+/* ==================== PÁRRAFOS ==================== */
+.acerca_section p{font-size:var(--fz_m2);color:var(--tx);line-height:1.9;margin-bottom:1.2vh;text-align:justify;font-family:var(--ff_P)}
+.acerca_section p:last-child{margin-bottom:0}
+
+/* ==================== ENLACES ==================== */
+.acerca_section a{color:var(--mco);font-weight:600;text-decoration:underline;transition:all var(--tr_f)}
+.acerca_section a:hover{color:var(--hva);text-decoration:none}
+
+/* ==================== STRONG ==================== */
+.acerca_section strong{color:var(--mco);font-weight:700;font-family:var(--ff_R)}
+
+/* ==================== FOOTER SECTION ==================== */
+.acerca_footer{text-align:center;background:linear-gradient(135deg,var(--bg4),transparent);border-radius:1vh;padding:3vh 2vh!important;margin-top:3vh;border:none!important}
+.acerca_footer p{text-align:center;font-size:var(--fz_m3);color:var(--tx1);line-height:1.8}
+
+/* ==================== FIRMA ==================== */
+.acerca_firma{margin-top:2vh;padding-top:2vh;border-top:0.2vh solid var(--bg5)}
+.acerca_firma p{font-size:var(--fz_m2);color:var(--tx2);margin-bottom:0.5vh;font-style:italic}
+.firma_nombre{font-size:var(--fz_m5)!important;color:var(--mco)!important;font-weight:700!important;font-family:var(--ff_R)!important;font-style:normal!important;margin-top:1vh!important}
+.firma_rol{font-size:var(--fz_m)!important;color:var(--tx3)!important;font-style:normal!important;opacity:0.8}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width:768px){
+.acerca_container{padding:1.5vh 2vw}
+.acerca_hero{padding:3vh 2vh 2vh;margin-bottom:2vh}
+.acerca_hero h1{font-size:var(--fz_l2);flex-direction:column;gap:0.5vh}
+.acerca_hero p{font-size:var(--fz_m2)}
+.acerca_content{padding:2.5vh 3vh}
+.acerca_section{margin-bottom:2.5vh;padding-bottom:2vh}
+.acerca_section h3{font-size:var(--fz_m4)}
+.acerca_section p{font-size:var(--fz_m1);text-align:left}
+.acerca_footer{padding:2.5vh 2vh!important}
+.acerca_footer p{font-size:var(--fz_m2)}
+.firma_nombre{font-size:var(--fz_m4)!important}
+}
+@media (max-width:570px){
+.acerca_hero h1{font-size:var(--fz_l1)}
+.acerca_hero p{font-size:var(--fz_m1)}
+.acerca_content{padding:2vh 2.5vh}
+.acerca_section{margin-bottom:2vh;padding-bottom:1.5vh}
+.acerca_section h3{font-size:var(--fz_m3)}
+.acerca_section p{font-size:var(--fz_m)}
+.acerca_footer{padding:2vh 1.5vh!important}
+.firma_nombre{font-size:var(--fz_m3)!important}
+.firma_rol{font-size:var(--fz_s4)!important}
+}

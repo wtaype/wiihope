@@ -6,9 +6,9 @@ export function personal(wi) {
   Mensaje?.('Bienvenido '+wi.nombre);
   $('.wiauth').html(`
     <div class="sesion">
-      <img src="${wi.imagen||'./smile.avif'}" alt="${wi.nombre}"><span>${wi.nombre}</span>
+      <img src="${wi.imagen||'./smile.avif'}" alt="${wi.nombre}"> <span>${wi.nombre}</span>
+      <a class="bt_salir" title="Cerrar sesión"><i class="fas fa-sign-out-alt"></i></a>
     </div>
-    <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
   `);
 } // Funcion para Auth personal 
 
@@ -17,8 +17,8 @@ export const header = (() => {
 
   function publico() {
     $('.wiauth').html(`
-      <button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button>
-      <button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>
+      <a class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></a>
+      <a class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
   `);
   }
 
@@ -34,9 +34,9 @@ export const header = (() => {
 //CERRAR SESSIÓN
   $(document).on('click', '.bt_salir', async () => {
     const { auth, signOut } = await import('./auth/wiauth.js');
-    await signOut(auth); location.reload();
-    removels('wiSmile wiFlags');
+    await signOut(auth);
+    ['wiflash', 'wiTema'].map(k => [k, getls(k)]).concat(localStorage.clear()) && localStorage.setItem('wiflash', JSON.stringify(getls('wiflash'))) && localStorage.setItem('wiTema', JSON.stringify(getls('wiTema')));
+    location.reload();
   });
-
 })();
 

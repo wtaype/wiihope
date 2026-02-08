@@ -14,6 +14,8 @@ function footer(){
   `;
 }; $('body').append(footer());  //Actualizar 
 
-const mstyles = `
-:root{--bgim:url("https://d35aaqx5ub95lt.cloudfront.net/images/star-pattern.svg")}.wicontainer{background: var(--bgim),linear-gradient(to bottom,var(--bg),var(--wb));}
-`;$('head').append(`<style>${mstyles}</style> `);
+$("head").append(`<style>:root{--bgim:url("${import.meta.env.BASE_URL}wpuntos.svg")}body,.hd{background:var(--bgim),linear-gradient(to bottom,var(--bg),var(--wb))}</style>`)
+$('.wimenu').on('click', function(){$('.hd').toggleClass('movil'); $(this).find('i').toggleClass('fa-bars fa-times')});
+
+$('.lpx').html(`<img width="600" height="400" alt="Dios es bueno" src="${import.meta.env.BASE_URL}jesus.webp"/>`); //Wiihope
+console.log(`✅ ${app} : ${version}`)
