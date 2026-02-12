@@ -25,7 +25,7 @@ export const citas = () => {
             <option value="recientes">🆕 Más recientes</option>
             <option value="antiguas">📅 Más antiguas</option>
           </select>
-          ${smile?.email ? '<button class="citas_add"><i class="fas fa-plus"></i> Nuevo</button>' : ''}
+          <button class="citas_add" style="display:${smile?.email ? 'inline-flex' : 'none'}"><i class="fas fa-plus"></i> Nuevo</button>
         </div>
       </div>
       <div class="phrs">${'<div class="phr skc"></div>'.repeat(6)}</div>
@@ -190,7 +190,7 @@ export const citas = () => {
   };
 
   // ==================== EVENTOS ====================
-  window.addEventListener('wiFresh', (e) => { smile = e.detail; });
+  window.addEventListener('wiFresh', (e) => (smile = e.detail, $('.citas_add').toggle(!!smile?.email)));
   
   $(document).on('click', '.cat_btn', function() {
     $('.cat_btn').removeClass('active');
